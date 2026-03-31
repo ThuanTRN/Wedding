@@ -643,9 +643,15 @@
         let db = null;
         
         // --- KHỞI TẠO FIREBASE ---
-        const firebaseConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : '{}';
-        let firebaseConfig;
-        try { firebaseConfig = JSON.parse(firebaseConfigStr); } catch(e) { firebaseConfig = {}; }
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQKPgkm72njQJN75b7n99H2duXpH9lf5M",
+            authDomain: "wedding-thuan-bich.firebaseapp.com",
+            projectId: "wedding-thuan-bich",
+            storageBucket: "wedding-thuan-bich.firebasestorage.app",
+            messagingSenderId: "706546479577",
+            appId: "1:706546479577:web:67258277f0d77ab3d7a9c8",
+            measurementId: "G-E5ESFRVVTV"
+        };
         const appId = 'thuan-bich-wedding'; 
 
         // --- HÀM XỬ LÝ LƯU BÚT VÀ RSVP ---
