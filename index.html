@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiệp Cưới | Ngọc Bích & Văn Thuân</title>
-    
+    <link rel="shortcut icon" href="/images/2C3A7079.JPG">
     <!-- Google Fonts for Typography matching -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -505,66 +505,15 @@
             );
         }
 
-        // 2. Firebase Initialization
-        const firebaseConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : '{}';
-        let firebaseConfig;
-        try { firebaseConfig = JSON.parse(firebaseConfigStr); } catch(e) { firebaseConfig = {}; }
+        // Global State & Fallback
+        window.allRsvps = []; 
+        window.allWishes = [];
+        let useFirebase = false;
+        let currentUser = null;
+        let db = null;
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'demo-wedding-app';
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        let currentUser = null;
-        window.allRsvps = []; // Store for the Excel view
-
-        const initAuth = async () => {
-            try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch(error) {
-                console.error("Firebase Auth Error:", error);
-            }
-        };
-
-        // Listen for Auth State & Setup Firestore Listeners
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-            if (user) {
-                setupRealtimeListeners();
-            }
-        });
-
-        initAuth();
-
-        function setupRealtimeListeners() {
-            if (!currentUser) return;
-
-            // Lắng nghe Lời chúc (Wishes - Public)
-            const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
-            onSnapshot(wishesRef, (snapshot) => {
-                const wishes = [];
-                snapshot.forEach(doc => wishes.push({ id: doc.id, ...doc.data() }));
-                // Sort by timestamp descending
-                wishes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                renderWishes(wishes);
-            }, (error) => console.error("Error fetching wishes:", error));
-
-            // Lắng nghe RSVP (Groom only, but stored in public for demo simplicity)
-            const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
-            onSnapshot(rsvpsRef, (snapshot) => {
-                const rsvps = [];
-                snapshot.forEach(doc => rsvps.push({ id: doc.id, ...doc.data() }));
-                rsvps.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                window.allRsvps = rsvps;
-                if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
-                    renderRsvps(); // Update table if modal is open
-                }
-            }, (error) => console.error("Error fetching RSVPs:", error));
-        }
+        // --- ĐỊNH NGHĨA CÁC HÀM XỬ LÝ TRƯỚC ĐỂ TRÁNH LỖI NẾU FIREBASE BỊ NGẮT --- //
 
         // Render Wishes to DOM
         function renderWishes(wishes) {
@@ -620,7 +569,6 @@
 
         // Handle Submit Wish
         window.handleWishSubmit = async () => {
-            if (!currentUser) return;
             const nameInput = document.getElementById('wish-name');
             const textInput = document.getElementById('wish-result');
             const btn = document.getElementById('submit-wish-btn');
@@ -636,13 +584,17 @@
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ĐANG GỬI...';
 
+            const wishData = { name, text, timestamp: Date.now() };
+
             try {
-                const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
-                await addDoc(wishesRef, {
-                    name: name,
-                    text: text,
-                    timestamp: Date.now()
-                });
+                if (useFirebase && currentUser) {
+                    const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
+                    await addDoc(wishesRef, wishData);
+                } else {
+                    // Fallback Local Memory (Hoạt động mượt mà cả khi không có Database)
+                    window.allWishes.unshift(wishData);
+                    renderWishes(window.allWishes);
+                }
                 textInput.value = ''; // clear only the wish box
             } catch (error) {
                 console.error("Lỗi gửi lời chúc:", error);
@@ -654,7 +606,6 @@
 
         // Handle Submit RSVP
         window.handleRsvpSubmit = async () => {
-            if (!currentUser) return;
             const nameInput = document.getElementById('rsvp-name');
             const countInput = document.getElementById('rsvp-count');
             const statusInput = document.getElementById('rsvp-status');
@@ -672,16 +623,21 @@
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Đang xử lý...';
 
+            const rsvpData = { name, count, attending: status, timestamp: Date.now() };
+
             try {
-                const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
-                await addDoc(rsvpsRef, {
-                    name: name,
-                    count: count,
-                    attending: status,
-                    timestamp: Date.now()
-                });
+                if (useFirebase && currentUser) {
+                    const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
+                    await addDoc(rsvpsRef, rsvpData);
+                } else {
+                    // Fallback Local Memory
+                    window.allRsvps.unshift(rsvpData);
+                    if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
+                        renderRsvps(); 
+                    }
+                }
                 
-                // Success
+                // Mở thông báo thành công
                 window.closeModal('rsvp-modal');
                 window.openModal('thank-you-modal');
                 nameInput.value = '';
@@ -702,7 +658,7 @@
             
             if(pwd === '123456') {
                 err.classList.add('hidden');
-                document.getElementById('groom-password').value = ''; // clear
+                document.getElementById('groom-password').value = ''; 
                 window.closeModal('groom-login-modal');
                 window.openModal('groom-dashboard-modal');
                 renderRsvps();
@@ -711,7 +667,7 @@
             }
         };
 
-        // GEMINI API - AI WISH GENERATOR (Kept from existing logic)
+        // GEMINI API - AI WISH GENERATOR
         const apiKey = "";
         
         window.generateAIWish = async () => {
@@ -770,6 +726,75 @@
             btnText.innerText = "Tạo Lại Lời Chúc Khác";
             spinner.classList.add('hidden');
         };
+
+        // --- KHỞI TẠO FIREBASE AN TOÀN --- //
+
+        const firebaseConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : '{}';
+        let firebaseConfig;
+        try { firebaseConfig = JSON.parse(firebaseConfigStr); } catch(e) { firebaseConfig = {}; }
+
+        // Bọc trong Try-Catch để không làm hỏng ứng dụng nếu thiếu Config
+        if (firebaseConfig && firebaseConfig.apiKey) {
+            try {
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                db = getFirestore(app);
+                useFirebase = true;
+
+                const initAuth = async () => {
+                    try {
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch(error) {
+                        console.error("Firebase Auth Error:", error);
+                    }
+                };
+
+                onAuthStateChanged(auth, (user) => {
+                    currentUser = user;
+                    if (user) {
+                        setupRealtimeListeners();
+                    }
+                });
+
+                initAuth();
+
+            } catch (error) {
+                console.warn("Lỗi khởi tạo Firebase. Tự động chuyển sang chế độ lưu trữ cục bộ.", error);
+            }
+        } else {
+            console.warn("Môi trường thiếu API Key Firebase. Tự động chuyển sang chế độ lưu trữ cục bộ.");
+            // Kích hoạt render bảng giả lập
+            renderWishes(window.allWishes);
+            renderRsvps();
+        }
+
+        function setupRealtimeListeners() {
+            if (!currentUser || !useFirebase) return;
+
+            const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
+            onSnapshot(wishesRef, (snapshot) => {
+                const wishes = [];
+                snapshot.forEach(doc => wishes.push({ id: doc.id, ...doc.data() }));
+                wishes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                window.allWishes = wishes;
+                renderWishes(wishes);
+            }, (error) => console.error("Error fetching wishes:", error));
+
+            const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
+            onSnapshot(rsvpsRef, (snapshot) => {
+                const rsvps = [];
+                snapshot.forEach(doc => rsvps.push({ id: doc.id, ...doc.data() }));
+                rsvps.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                window.allRsvps = rsvps;
+                if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
+                    renderRsvps(); 
+                }
+            }, (error) => console.error("Error fetching RSVPs:", error));
+        }
 
     </script>
 
