@@ -6,6 +6,7 @@
     <title>Thiệp Cưới | Ngọc Bích & Văn Thuân</title>
     
     <!-- Google Fonts for Typography matching -->
+    <link rel="icon" type="image/jpeg" href="image/2C3A7079.JPG">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pattaya&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -79,27 +80,100 @@
         .custom-name-font {
             font-family: 'Pattaya', cursive;
         }
+
+        /* Ambient Rise Animation for Overlay */
+        @keyframes ambient-rise {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) translateX(var(--sway)); opacity: 0; }
+        }
+
+        /* Seal Pulse Animation */
+        @keyframes seal-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 4px 20px rgba(113, 0, 1, 0.5), inset 0 2px 4px rgba(255,255,255,0.3); }
+            50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 6px 25px rgba(113, 0, 1, 0.7), inset 0 2px 4px rgba(255,255,255,0.4); }
+        }
+
+        /* Shine Animation for Button */
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
     </style>
 </head>
 <body class="font-sans hide-scrollbar bg-gray-50 text-wedding-red overflow-x-hidden">
 
     <!-- MÀN HÌNH CHỜ (WELCOME OVERLAY) ĐỂ KÍCH HOẠT NHẠC -->
-    <div id="welcome-overlay" class="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-wedding-bg transition-opacity duration-1000">
-        <!-- Hoa văn chìm -->
-        <div class="absolute inset-0 pointer-events-none z-0 opacity-20" style="background-image: url('https://chungdoi.com/images/themes/songphung-red/NENGIAY.jpg'); background-size: 100%; background-repeat: repeat-y; background-position: center top;"></div>
-        <div class="relative z-10 text-center px-6">
-            <h2 class="text-5xl md:text-7xl custom-name-font text-wedding-red mb-6">Ngọc Bích & Văn Thuân</h2>
-            <p class="font-cormorant text-xl font-bold text-wedding-red mb-10 italic">Trân trọng kính mời bạn đến dự đám cưới của chúng tôi</p>
-            <button id="open-invitation" class="px-10 py-4 bg-wedding-red text-white font-bold rounded shadow-xl hover:scale-105 transition-transform flex items-center justify-center mx-auto gap-3 text-lg uppercase tracking-widest">
-                <i class="fa-solid fa-envelope-open-text"></i>
-                Mở Thiệp
-            </button>
+    <div id="welcome-overlay" style="background:linear-gradient(to bottom right, #710001, #5a0001, #450001)" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden transition-opacity duration-1000">
+        
+        <!-- Hiệu ứng chữ Hỷ bay -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 1;">
+            <div class="absolute" style="left: 93.7%; bottom: -30px; color: rgba(255,255,255,0.1); font-size: 24px; --sway: 27px; animation: ambient-rise 12.6s ease-in-out -2.5s infinite;">囍</div>
+            <div class="absolute" style="left: 89.3%; bottom: -30px; color: rgba(255,255,255,0.15); font-size: 30px; --sway: 11px; animation: ambient-rise 13.2s ease-in-out -2.2s infinite;">囍</div>
+            <div class="absolute" style="left: 31.7%; bottom: -30px; color: rgba(255,255,255,0.08); font-size: 21px; --sway: 18px; animation: ambient-rise 17.4s ease-in-out -1.9s infinite;">囍</div>
+            <div class="absolute" style="left: 43.7%; bottom: -30px; color: rgba(255,255,255,0.12); font-size: 18px; --sway: 12px; animation: ambient-rise 21.7s ease-in-out -1.6s infinite;">囍</div>
+            <div class="absolute" style="left: 14.5%; bottom: -30px; color: rgba(255,255,255,0.1); font-size: 28px; --sway: -26px; animation: ambient-rise 18.9s ease-in-out -1.3s infinite;">囍</div>
+            <div class="absolute" style="left: 36.0%; bottom: -30px; color: rgba(255,255,255,0.18); font-size: 16px; --sway: -24px; animation: ambient-rise 15.2s ease-in-out -1s infinite;">囍</div>
+            <div class="absolute" style="left: 90.8%; bottom: -30px; color: rgba(255,255,255,0.05); font-size: 19px; --sway: 24px; animation: ambient-rise 19.5s ease-in-out -0.7s infinite;">囍</div>
+            <div class="absolute" style="left: 72.9%; bottom: -30px; color: rgba(255,255,255,0.1); font-size: 22px; --sway: -19px; animation: ambient-rise 21.1s ease-in-out -0.4s infinite;">囍</div>
+            <div class="absolute" style="left: 46.2%; bottom: -30px; color: rgba(255,255,255,0.14); font-size: 17px; --sway: -14px; animation: ambient-rise 21.4s ease-in-out -0.1s infinite;">囍</div>
+            <div class="absolute" style="left: 80.7%; bottom: -30px; color: rgba(255,255,255,0.09); font-size: 25px; --sway: 29px; animation: ambient-rise 15.1s ease-in-out 0.2s infinite;">囍</div>
+            <div class="absolute" style="left: 41.6%; bottom: -30px; color: rgba(255,255,255,0.1); font-size: 14px; --sway: 0px; animation: ambient-rise 13.3s ease-in-out 0.5s infinite;">囍</div>
+            <div class="absolute" style="left: 27.7%; bottom: -30px; color: rgba(255,255,255,0.13); font-size: 32px; --sway: -12px; animation: ambient-rise 13.1s ease-in-out 0.8s infinite;">囍</div>
+        </div>
+
+        <div style="z-index:10" class="relative">
+            <div class="relative w-[310px] sm:w-[340px] md:w-[520px] lg:w-[600px]">
+                
+                <!-- Con dấu Hỷ ở giữa -->
+                <div style="top:0px;width:56px;height:56px;transform:translate(-50%, -50%);background:radial-gradient(circle at 30% 30%, #710001, rgb(83, 0, 0));animation:seal-pulse 2s ease-in-out infinite" class="absolute left-1/2 rounded-full flex items-center justify-center z-30">
+                    <div style="background-color:#FFF0E7;opacity:0.9;-webkit-mask-image:url('https://chungdoi.com/images/themes/songlong-red/chinese_happiness.webp');-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url('https://chungdoi.com/images/themes/songlong-red/chinese_happiness.webp');mask-size:contain;mask-repeat:no-repeat;mask-position:center" class="w-8 h-8"></div>
+                </div>
+
+                <div style="box-shadow:0 25px 60px -12px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.2), 0 0 40px rgba(113, 0, 1, 0.15)" class="relative rounded-lg">
+                    <div style="background:rgba(255, 240, 231, 0.95);border:1px solid rgba(113, 0, 1, 0.15);clip-path:inset(0 round 8px)" class="relative rounded-lg overflow-hidden">
+                        
+                        <!-- Hoa văn góc -->
+                        <img src="https://chungdoi.com/images/themes/songphung-red/Phuong.webp" alt="" aria-hidden="true" class="absolute pointer-events-none w-[120px] md:w-[220px] -top-[20px] -left-[20px] md:-top-[20px] md:-left-[50px] opacity-90 rotate-12">
+                        <img src="https://chungdoi.com/images/themes/songphung-red/Phuong.webp" alt="" aria-hidden="true" class="absolute pointer-events-none w-[140px] md:w-[220px] -bottom-[120px] -right-[40px] md:-bottom-[110px] md:-right-[50px] opacity-90 -scale-x-100 rotate-6">
+                        <img src="https://chungdoi.com/images/themes/songphung-red/HOA.webp" alt="" aria-hidden="true" class="absolute pointer-events-none w-[120px] md:w-[160px] -bottom-[20px] -left-[20px] md:-bottom-[30px] md:-left-[30px] opacity-60">
+                        <img src="https://chungdoi.com/images/themes/songphung-red/HOA.webp" alt="" aria-hidden="true" class="absolute pointer-events-none w-[100px] md:w-[140px] -top-[15px] -right-[15px] md:-top-[20px] md:-right-[20px] opacity-60 rotate-180">
+                        
+                        <div class="relative z-10 text-center px-6 pt-20 pb-12 md:pt-24 md:pb-12">
+                            <h1 class="custom-title-font text-[#710001] text-4xl sm:text-5xl mb-2 leading-tight uppercase font-bold">Ngọc Bích<br><span class="text-2xl sm:text-3xl lowercase font-normal">&</span><br>Văn Thuân</h1>
+                            
+                            <div class="flex items-center justify-center gap-3 mb-4">
+                                <div style="background:linear-gradient(to right, transparent, #710001)" class="w-10 h-px"></div>
+                                <span style="color:#710001;opacity:0.7" class="text-sm">❦</span>
+                                <div style="background:linear-gradient(to left, transparent, #710001)" class="w-10 h-px"></div>
+                            </div>
+                            
+                            <div class="font-cormorant text-[#710001]/90 text-[18px] sm:text-[20px] mb-5 font-bold">3 tháng 5, 2026</div>
+                            
+                            <div class="mb-8">
+                                <p class="font-cormorant text-[#710001]/90 text-[18px] sm:text-[20px] mb-2 font-bold">Thân Mời</p>
+                                <div style="background-color:rgba(113, 0, 1, 0.1)" class="inline-block px-6 py-2 rounded-xl mb-2">
+                                    <h2 class="font-cormorant text-[#710001] text-xl sm:text-2xl font-bold">Bạn và người thương</h2>
+                                </div>
+                                <p class="font-cormorant text-[#710001]/90 text-[16px] sm:text-[18px] font-bold">đến dự buổi tiệc chung vui cùng gia đình</p>
+                            </div>
+                            
+                            <button id="open-invitation" style="background-color:#710001;color:#FFF0E7;box-shadow:0 4px 14px rgba(113, 0, 1, 0.35);" class="relative px-10 py-3 text-lg font-cormorant font-bold rounded-full shadow-lg overflow-hidden transition-transform hover:scale-105 active:scale-95 flex items-center justify-center mx-auto">
+                                <span>Mở thiệp</span>
+                                <div style="background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);animation:shine 3s ease-in-out infinite" class="absolute top-0 h-full w-8 pointer-events-none"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- AUDIO PLAYER -->
+    <!-- AUDIO PLAYER - Ed Sheeran Perfect -->
     <audio id="bg-music" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-acoustic-guitar-2425.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/2s8jix.mp3" type="audio/mpeg">
     </audio>
 
     <main class="flex justify-center items-center min-h-screen bg-gray-50">
