@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Cưới | Minh Tuấn & Thu Hà</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#d4af37', // Gold
+                        secondary: '#f5e6e8', // Blush pink
+                        dark: '#4a4a4a', // Soft black for text
+                        light: '#fdfbf7', // Off white background
+                    },
+                    fontFamily: {
+                        cursive: ['Great Vibes', 'cursive'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #fdfbf7;
+            color: #4a4a4a;
+            overflow-x: hidden;
+        }
+
+        /* Music Button Animation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spin {
+            animation: spin 4s linear infinite;
+        }
+
+        /* Fade-in Animation for elements on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax effect for Banner */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Photo Gallery Hover */
+        .gallery-img {
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        
+        /* Loading Overlay transition */
+        #welcome-overlay {
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Welcome Overlay (To enable auto-play music upon interaction) -->
+    <div id="welcome-overlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-light/95 backdrop-blur-sm">
+        <div class="text-center px-6">
+            <h2 class="font-cursive text-5xl md:text-7xl text-primary mb-4">Minh Tuấn & Thu Hà</h2>
+            <p class="font-serif text-lg md:text-xl text-dark mb-8 italic">Trân trọng kính mời bạn đến dự đám cưới của chúng tôi</p>
+            <button id="open-invitation" class="px-8 py-3 bg-primary text-white font-sans text-sm tracking-widest uppercase rounded-full hover:bg-yellow-600 transition duration-300 shadow-lg flex items-center justify-center mx-auto gap-2">
+                <i class="fa-solid fa-envelope-open-text"></i>
+                Mở Thiệp
+            </button>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <!-- Using a royalty-free acoustic romantic track for demo -->
+    <audio id="bg-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-acoustic-guitar-2425.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Music Controller -->
+    <button id="music-toggle" class="fixed bottom-6 right-6 z-40 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center text-primary border border-gray-100 hover:scale-110 transition-transform">
+        <i id="music-icon" class="fa-solid fa-music spin"></i>
+    </button>
+
+    <!-- HERO BANNER -->
+    <header class="relative w-full h-screen flex flex-col items-center justify-center text-center parallax" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 px-4 text-white w-full max-w-4xl mx-auto flex flex-col items-center">
+            <p class="font-sans tracking-[0.2em] uppercase text-sm md:text-base mb-4">Lễ Thành Hôn</p>
+            <h1 class="font-cursive text-7xl md:text-9xl mb-4 text-shadow-md">Tuấn & Hà</h1>
+            <p class="font-serif text-xl md:text-2xl italic mb-8 border-t border-b border-white/50 py-2 px-8">20 Tháng 10, 2026</p>
+            
+            <!-- Mouse scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <i class="fa-solid fa-chevron-down text-2xl text-white/80"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- INVITATION MESSAGE -->
+    <section class="py-20 px-6 bg-light text-center">
+        <div class="max-w-3xl mx-auto fade-in">
+            <div class="text-primary text-4xl mb-4"><i class="fa-solid fa-heart"></i></div>
+            <h2 class="font-serif text-3xl md:text-4xl font-semibold mb-6">Lời Mời Trân Trọng</h2>
+            <p class="font-sans leading-relaxed text-dark text-center md:text-lg mb-6">
+                Tình yêu là một hành trình dài và chúng tôi vô cùng hạnh phúc khi tìm thấy nhau. 
+                Sự hiện diện của bạn là niềm vinh hạnh và là món quà ý nghĩa nhất để chúc phúc cho tình yêu của chúng tôi.
+                Trân trọng kính mời bạn đến chung vui cùng gia đình.
+            </p>
+            <p class="font-cursive text-3xl text-primary mt-4">Minh Tuấn & Thu Hà</p>
+        </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="py-16 bg-secondary/30 relative">
+        <div class="max-w-4xl mx-auto text-center px-4 fade-in">
+            <h3 class="font-serif text-2xl md:text-3xl mb-10 italic">Cùng đếm ngược thời gian</h3>
+            
+            <div class="flex justify-center gap-4 md:gap-8">
+                <div class="bg-white shadow-md rounded-lg p-4 md:p-6 w-20 md:w-28 text-center border-t-2 border-primary">
+                    <span id="days" class="block font-serif text-3xl md:text-5xl text-primary font-semibold">00</span>
+                    <span class="block font-sans text-xs md:text-sm uppercase tracking-wider mt-2 text-gray-500">Ngày</span>
+                </div>
+                <div class="bg-white shadow-md rounded-lg p-4 md:p-6 w-20 md:w-28 text-center border-t-2 border-primary">
+                    <span id="hours" class="block font-serif text-3xl md:text-5xl text-primary font-semibold">00</span>
+                    <span class="block font-sans text-xs md:text-sm uppercase tracking-wider mt-2 text-gray-500">Giờ</span>
+                </div>
+                <div class="bg-white shadow-md rounded-lg p-4 md:p-6 w-20 md:w-28 text-center border-t-2 border-primary">
+                    <span id="minutes" class="block font-serif text-3xl md:text-5xl text-primary font-semibold">00</span>
+                    <span class="block font-sans text-xs md:text-sm uppercase tracking-wider mt-2 text-gray-500">Phút</span>
+                </div>
+                <div class="bg-white shadow-md rounded-lg p-4 md:p-6 w-20 md:w-28 text-center border-t-2 border-primary">
+                    <span id="seconds" class="block font-serif text-3xl md:text-5xl text-primary font-semibold">00</span>
+                    <span class="block font-sans text-xs md:text-sm uppercase tracking-wider mt-2 text-gray-500">Giây</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WEDDING CALENDAR/SCHEDULE -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-serif text-4xl text-center mb-16 fade-in">Sự Kiện Đám Cưới</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Event 1 -->
+                <div class="border border-gray-200 p-8 rounded-xl shadow-sm hover:shadow-md transition text-center fade-in bg-light relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+                    <div class="w-16 h-16 bg-secondary text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fa-solid fa-house-chimney-heart"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-2">Lễ Gia Tiên</h3>
+                    <p class="font-sans text-primary font-medium mb-4">08:00 Sáng - 20/10/2026</p>
+                    <p class="font-sans text-sm text-gray-600 mb-6 leading-relaxed">
+                        Tư gia nhà gái<br>
+                        Số 123, Đường Hạnh Phúc, Quận Tình Yêu<br>
+                        Thành phố Hà Nội
+                    </p>
+                    <a href="#" class="inline-block border border-primary text-primary px-6 py-2 rounded-full font-sans text-sm hover:bg-primary hover:text-white transition">
+                        <i class="fa-solid fa-map-location-dot mr-2"></i>Xem Bản Đồ
+                    </a>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="border border-gray-200 p-8 rounded-xl shadow-sm hover:shadow-md transition text-center fade-in bg-light relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+                    <div class="w-16 h-16 bg-secondary text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fa-solid fa-champagne-glasses"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-2">Tiệc Cưới (Reception)</h3>
+                    <p class="font-sans text-primary font-medium mb-4">11:30 Trưa - 20/10/2026</p>
+                    <p class="font-sans text-sm text-gray-600 mb-6 leading-relaxed">
+                        Trung Tâm Tiệc Cưới Grand Palace<br>
+                        Sảnh Kim Cương, Tầng 2<br>
+                        Số 456, Phố Mùa Thu, Thành phố Hà Nội
+                    </p>
+                    <a href="#" class="inline-block border border-primary text-primary px-6 py-2 rounded-full font-sans text-sm hover:bg-primary hover:text-white transition">
+                        <i class="fa-solid fa-map-location-dot mr-2"></i>Xem Bản Đồ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHOTO ALBUM -->
+    <section class="py-20 px-4 md:px-6 bg-light">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-4xl text-center mb-4 fade-in">Album Ảnh Cưới</h2>
+            <p class="font-cursive text-2xl text-primary text-center mb-12 fade-in">Khoảnh khắc tình yêu</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="gallery-item overflow-hidden rounded-lg shadow-sm fade-in">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 1" class="gallery-img w-full h-72 object-cover">
+                </div>
+                <div class="gallery-item overflow-hidden rounded-lg shadow-sm fade-in">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 2" class="gallery-img w-full h-72 object-cover">
+                </div>
+                <div class="gallery-item overflow-hidden rounded-lg shadow-sm fade-in">
+                    <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 3" class="gallery-img w-full h-72 object-cover">
+                </div>
+                <div class="gallery-item overflow-hidden rounded-lg shadow-sm fade-in">
+                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 4" class="gallery-img w-full h-72 object-cover">
+                </div>
+                <div class="gallery-item overflow-hidden rounded-lg shadow-sm fade-in">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 5" class="gallery-img w-full h-72 object-cover">
+                </div>
+                <div class="gallery-item overflow-hidden rounded-lg shadow-sm fade-in">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Photo 6" class="gallery-img w-full h-72 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QR CODE & RSVP -->
+    <section class="py-20 px-6 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 fade-in">
+            <!-- QR Code Box -->
+            <div class="w-full md:w-1/3 flex flex-col items-center bg-secondary/20 p-8 rounded-2xl border border-secondary">
+                <h3 class="font-serif text-xl font-semibold mb-4 text-center">Mã QR Thiệp Mời</h3>
+                <div class="bg-white p-2 rounded-xl shadow-sm mb-4">
+                    <!-- Placeholder QR code generated from API -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://thiepcuoimau.com/tuandha" alt="QR Code" class="w-40 h-40">
+                </div>
+                <p class="font-sans text-sm text-center text-gray-500">Quét mã để lưu thời gian hoặc gửi lời chúc</p>
+            </div>
+
+            <!-- RSVP Text -->
+            <div class="w-full md:w-2/3 text-center md:text-left">
+                <h2 class="font-cursive text-5xl text-primary mb-6">Hẹn Gặp Bạn!</h2>
+                <p class="font-sans leading-relaxed text-gray-600 mb-8">
+                    Chúng tôi đang đếm từng ngày để được cùng bạn chia sẻ những khoảnh khắc tuyệt vời nhất. 
+                    Nếu có bất kỳ thắc mắc nào về địa điểm, đừng ngần ngại liên hệ trực tiếp với Cô dâu hoặc Chú rể nhé.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <button class="bg-primary text-white px-8 py-3 rounded-full font-sans tracking-wide hover:bg-yellow-600 transition shadow-md">
+                        Xác nhận Tham Dự (RSVP)
+                    </button>
+                    <button class="border border-primary text-primary px-8 py-3 rounded-full font-sans tracking-wide hover:bg-secondary/50 transition">
+                        Gửi Lời Chúc
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white py-12 text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="font-cursive text-4xl mb-4 text-primary">Cảm ơn bạn!</h2>
+            <p class="font-sans text-sm text-gray-400 tracking-widest uppercase mb-8">Minh Tuấn & Thu Hà</p>
+            <div class="flex justify-center gap-6 mb-8 border-t border-gray-700 pt-8">
+                <span class="text-xs text-gray-500 font-sans">&copy; 2026 Bản quyền thuộc về Minh Tuấn & Thu Hà.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. WELCOME OVERLAY & AUDIO PLAY
+        const welcomeOverlay = document.getElementById('welcome-overlay');
+        const openBtn = document.getElementById('open-invitation');
+        const bgMusic = document.getElementById('bg-music');
+        const musicToggleBtn = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        openBtn.addEventListener('click', () => {
+            // Hide overlay
+            welcomeOverlay.style.opacity = '0';
+            setTimeout(() => {
+                welcomeOverlay.style.visibility = 'hidden';
+                welcomeOverlay.style.display = 'none';
+            }, 1000);
+
+            // Play music
+            playMusic();
+            
+            // Allow scrolling on body
+            document.body.style.overflowY = 'auto';
+        });
+
+        // Toggle Music via floating button
+        musicToggleBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                pauseMusic();
+            } else {
+                playMusic();
+            }
+        });
+
+        function playMusic() {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicIcon.classList.add('spin');
+                musicIcon.classList.remove('fa-music-slash');
+                musicIcon.classList.add('fa-music');
+            }).catch((error) => {
+                console.log("Autoplay was prevented.", error);
+            });
+        }
+
+        function pauseMusic() {
+            bgMusic.pause();
+            isPlaying = false;
+            musicIcon.classList.remove('spin');
+            musicIcon.classList.remove('fa-music');
+            musicIcon.classList.add('fa-music-slash');
+        }
+
+        // Initially prevent scroll while overlay is active
+        document.body.style.overflowY = 'hidden';
+
+
+        // 2. COUNTDOWN TIMER
+        // Set wedding date (Year, Month - 1, Day, Hour, Min, Sec)
+        const weddingDate = new Date("Oct 20, 2026 11:30:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            // If the countdown is finished
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+
+
+        // 3. FADE-IN ANIMATION ON SCROLL
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 // Trigger when 15% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once it's visible
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(el => observer.observe(el));
+
+    </script>
+</body>
+</html>
