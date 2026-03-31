@@ -80,7 +80,7 @@
             font-family: 'Pattaya', cursive;
         }
 
-        /* Ambient Rise Animation for Overlay - Updated to be solid white */
+        /* Ambient Rise Animation for Overlay - Solid White */
         @keyframes ambient-rise {
             0% { transform: translateY(0) translateX(0); opacity: 0; }
             10% { opacity: 1; }
@@ -137,7 +137,7 @@
     <!-- MÀN HÌNH CHỜ (WELCOME OVERLAY) ĐỂ KÍCH HOẠT NHẠC -->
     <div id="welcome-overlay" style="background:linear-gradient(to bottom right, #710001, #5a0001, #450001)" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden transition-opacity duration-1000">
         
-        <!-- Hiệu ứng chữ Hỷ bay (Màu trắng rõ ràng) -->
+        <!-- Hiệu ứng chữ Hỷ bay (Màu trắng) -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 1;">
             <div class="absolute font-bold" style="left: 93.7%; bottom: -30px; color: #ffffff; font-size: 24px; --sway: 27px; animation: ambient-rise 12.6s ease-in-out -2.5s infinite;">囍</div>
             <div class="absolute font-bold" style="left: 89.3%; bottom: -30px; color: #ffffff; font-size: 30px; --sway: 11px; animation: ambient-rise 13.2s ease-in-out -2.2s infinite;">囍</div>
@@ -200,7 +200,7 @@
         </div>
     </div>
 
-    <!-- AUDIO PLAYER - Dùng file nhạc local trong thư mục music/ -->
+    <!-- AUDIO PLAYER -->
     <audio id="bg-music" loop preload="auto">
         <source src="music/perfect.mp3" type="audio/mpeg">
     </audio>
@@ -309,12 +309,11 @@
                                 </div>
                             </div>
 
-                            <!-- ALBUM (Sử dụng ảnh trong thư mục image-wedding) -->
+                            <!-- ALBUM -->
                             <div class="flex flex-col items-center mb-12 md:mb-16">
                                 <h2 class="uppercase font-bold text-[20px] md:text-[24px] mb-6 font-serif tracking-wider reveal reveal-up">Album Ảnh Cưới</h2>
                                 <div class="w-full max-w-[320px] md:max-w-[550px]">
                                     <div class="grid grid-cols-2 gap-3 md:gap-4 p-4 md:p-6" id="gallery-container">
-                                        <!-- Thêm object-position: center 15% để ko bị mất đầu và thêm data-index cho Lightbox -->
                                         <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-lg border border-[#00000011] bg-white/50 reveal reveal-up delay-100" onclick="openLightbox(0)">
                                             <img alt="Wedding photo 1" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-1.jpg">
                                         </div>
@@ -326,9 +325,6 @@
                                         </div>
                                         <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-lg border border-[#00000011] bg-white/50 reveal reveal-up delay-400" onclick="openLightbox(3)">
                                             <img alt="Wedding photo 4" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-4.jpg">
-                                            <div class="absolute inset-0 flex items-center justify-center bg-black/50 transition-opacity group-hover:bg-black/40">
-                                                <span class="text-xl font-semibold text-white">+Xem thêm</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -387,7 +383,7 @@
                             </section>
                         </div>
 
-                        <!-- GUESTBOOK (SỔ LƯU BÚT THUẦN TÚY) -->
+                        <!-- GUESTBOOK -->
                         <section class="relative px-4 md:px-8 pb-12 md:pb-16 z-10 flex flex-col items-center reveal reveal-up">
                             <div class="text-center mb-6">
                                 <h2 class="text-[32px] md:text-[40px] custom-name-font">Sổ lưu bút</h2>
@@ -408,7 +404,6 @@
                                 </div>
                             </div>
 
-                            <!-- Danh sách lời chúc sẽ tự động tải từ LocalStorage -->
                             <div id="wishes-list" class="mt-8 w-full max-h-[400px] space-y-3 overflow-y-auto pr-2 mx-auto max-w-[600px]">
                                 <div class="text-center italic opacity-70 p-4 font-cormorant font-bold text-lg">Đang tải lời chúc...</div>
                             </div>
@@ -455,7 +450,7 @@
                         </footer>
                         
                         <div class="relative flex items-center justify-between px-6 py-4 z-10 bg-wedding-bg w-full">
-                            <div></div> <!-- Spacer -->
+                            <div></div>
                             <a href="#" class="text-xs font-bold opacity-50 hover:opacity-100 transition-opacity text-[#710001]">♡ chungdoi.com</a>
                             <i onclick="window.openModal('groom-login-modal')" class="fa-solid fa-lock text-[#710001] opacity-30 hover:opacity-100 cursor-pointer p-2 transition-opacity" title="Khu vực dành cho chú rể"></i>
                         </div>
@@ -467,7 +462,7 @@
 
     <!-- FLOATING MUSIC BUTTON -->
     <div class="fixed bottom-8 right-6 md:right-10 z-40">
-        <button id="music-toggle" class="relative w-14 h-14 rounded-full shadow-2xl cursor-pointer focus:outline-none transition-transform hover:scale-110 active:scale-95 bg-wedding-red border-2 border-white/50 animate-spin-cd">
+        <button id="music-toggle" class="relative w-14 h-14 rounded-full shadow-2xl cursor-pointer focus:outline-none transition-transform hover:scale-110 active:scale-95 bg-wedding-red border-2 border-white/50">
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="flex items-end gap-[3px] h-5">
                     <div class="w-[3px] bg-white rounded-full animate-dance-1" style="height: 60%;"></div>
@@ -481,19 +476,16 @@
 
     <!-- MODALS -->
 
-    <!-- Lightbox Modal (Xem ảnh full màn hình) -->
+    <!-- Lightbox Modal -->
     <div id="lightbox-modal" class="fixed inset-0 z-[300] hidden bg-black/95 flex-col items-center justify-center opacity-0 transition-opacity duration-300">
-        <!-- Nút Đóng -->
         <button onclick="closeLightbox()" class="absolute top-4 right-4 md:top-6 md:right-8 text-white/70 hover:text-white transition-colors z-10 p-2">
             <i class="fa-solid fa-xmark text-3xl md:text-4xl"></i>
         </button>
         
-        <!-- Header Text -->
         <div class="absolute top-6 left-0 right-0 text-center text-white/50 font-cormorant text-sm tracking-widest uppercase pointer-events-none">
             <span id="lightbox-counter">1 / 4</span>
         </div>
 
-        <!-- Ảnh Chính & Mũi tên -->
         <div class="relative w-full h-[70vh] flex items-center justify-center px-4 md:px-16 mt-8">
             <button onclick="prevLightboxImage()" class="absolute left-2 md:left-8 text-white/50 hover:text-white text-3xl md:text-5xl p-4 transition-colors">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -506,11 +498,8 @@
             </button>
         </div>
 
-        <!-- Thumbnails -->
         <div class="w-full max-w-3xl mt-6 px-4">
-            <div id="lightbox-thumbnails" class="flex gap-2 justify-center overflow-x-auto py-2 px-4">
-                <!-- Thumbs will be injected here by JS -->
-            </div>
+            <div id="lightbox-thumbnails" class="flex gap-2 justify-center overflow-x-auto py-2 px-4"></div>
         </div>
     </div>
 
@@ -612,13 +601,11 @@
     </div>
 
 
-    <!-- JAVASCRIPT LOGIC (Firebase + LocalStorage Fallback + Lightbox + Scroll Animations) -->
+    <!-- JAVASCRIPT LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // 1. UI Modals Setup
         window.openModal = (id) => {
             const el = document.getElementById(id);
             if(el) el.classList.remove('hidden');
@@ -628,18 +615,15 @@
             if(el) el.classList.add('hidden');
         };
 
-        // Escaping HTML
         function escapeHtml(str) {
             return String(str).replace(/[&<>'"]/g, match => 
                 ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[match]
             );
         }
 
-        // Global State
         window.allRsvps = []; 
         window.allWishes = [];
         let useFirebase = false;
-        let currentUser = null;
         let db = null;
         
         // --- KHỞI TẠO FIREBASE ---
@@ -654,7 +638,6 @@
         };
         const appId = 'thuan-bich-wedding'; 
 
-        // --- HÀM XỬ LÝ LƯU BÚT VÀ RSVP ---
         function renderWishes(wishes) {
             const listEl = document.getElementById('wishes-list');
             if(wishes.length === 0) {
@@ -724,7 +707,7 @@
             const wishData = { name, text, timestamp: Date.now() };
 
             try {
-                if (useFirebase && currentUser) {
+                if (useFirebase) {
                     const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
                     await addDoc(wishesRef, wishData);
                 } else {
@@ -762,7 +745,7 @@
             const rsvpData = { name, count, attending: status, timestamp: Date.now() };
 
             try {
-                if (useFirebase && currentUser) {
+                if (useFirebase) {
                     const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
                     await addDoc(rsvpsRef, rsvpData);
                 } else {
@@ -801,27 +784,22 @@
             }
         };
 
-        // Firebase Init Logic
         if (firebaseConfig && firebaseConfig.apiKey) {
             try {
                 const app = initializeApp(firebaseConfig);
-                const auth = getAuth(app);
+                // BỎ AUTH - Dùng thẳng Database
                 db = getFirestore(app);
                 useFirebase = true;
-
-                const initAuth = async () => {
-                    try { await signInAnonymously(auth); } catch(error) {}
-                };
-
-                onAuthStateChanged(auth, (user) => {
-                    currentUser = user;
-                    if (user) setupRealtimeListeners();
-                });
-
-                initAuth();
-
-            } catch (error) {}
+                setupRealtimeListeners();
+            } catch (error) {
+                console.warn("Lỗi khởi tạo Firebase. Chuyển sang Local Storage.", error);
+                setupLocalStorage();
+            }
         } else {
+            setupLocalStorage();
+        }
+
+        function setupLocalStorage() {
             window.allWishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
             window.allRsvps = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
             renderWishes(window.allWishes);
@@ -829,7 +807,7 @@
         }
 
         function setupRealtimeListeners() {
-            if (!currentUser || !useFirebase) return;
+            if (!useFirebase) return;
 
             const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
             onSnapshot(wishesRef, (snapshot) => {
@@ -838,7 +816,9 @@
                 wishes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                 window.allWishes = wishes;
                 renderWishes(wishes);
-            }, (error) => {});
+            }, (error) => {
+                console.error("Error fetching wishes:", error);
+            });
 
             const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
             onSnapshot(rsvpsRef, (snapshot) => {
@@ -849,18 +829,20 @@
                 if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
                     renderRsvps(); 
                 }
-            }, (error) => {});
+            }, (error) => {
+                console.error("Error fetching RSVPs:", error);
+            });
         }
     </script>
 
-    <!-- GENERAL INTERACTION SCRIPT (Scroll, Lightbox, Music) -->
+    <!-- GENERAL INTERACTION SCRIPT -->
     <script>
         // 1. Scroll to top on load
         window.addEventListener('DOMContentLoaded', () => {
             window.scrollTo(0, 0);
         });
 
-        // 2. Scroll Animations (Intersection Observer)
+        // 2. Scroll Animations
         document.addEventListener("DOMContentLoaded", function() {
             const observerOptions = {
                 root: null,
@@ -872,7 +854,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // observer.unobserve(entry.target); // Bỏ comment nếu chỉ muốn animate 1 lần
                     }
                 });
             }, observerOptions);
@@ -944,9 +925,8 @@
 
         // 5. Lightbox Logic
         let currentImageIndex = 0;
-        const galleryImages = []; // Will store src strings
+        const galleryImages = []; 
         
-        // Gather all gallery images on load
         document.addEventListener("DOMContentLoaded", () => {
             const imgNodes = document.querySelectorAll('.gallery-img');
             imgNodes.forEach(node => {
@@ -961,7 +941,6 @@
             
             const modal = document.getElementById('lightbox-modal');
             modal.classList.remove('hidden');
-            // Trigger reflow for fade in
             void modal.offsetWidth;
             modal.classList.remove('opacity-0');
             modal.classList.add('opacity-100');
@@ -977,7 +956,7 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-            }, 300); // Wait for fade out
+            }, 300); 
         };
 
         window.prevLightboxImage = () => {
@@ -991,24 +970,19 @@
         };
 
         function updateLightboxView() {
-            // Update main image
             const mainImg = document.getElementById('lightbox-main-img');
-            // Simple fade effect
             mainImg.style.opacity = '0';
             setTimeout(() => {
                 mainImg.src = galleryImages[currentImageIndex];
                 mainImg.style.opacity = '1';
             }, 150);
 
-            // Update counter
             document.getElementById('lightbox-counter').innerText = `${currentImageIndex + 1} / ${galleryImages.length}`;
 
-            // Update active thumbnail
             const thumbs = document.querySelectorAll('.lightbox-thumb');
             thumbs.forEach((thumb, i) => {
                 if (i === currentImageIndex) {
                     thumb.classList.add('thumb-active');
-                    // Scroll thumb into view smoothly
                     thumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                 } else {
                     thumb.classList.remove('thumb-active');
@@ -1026,7 +1000,6 @@
             `).join('');
         }
 
-        // Handle keyboard arrows for lightbox
         document.addEventListener('keydown', (e) => {
             const modal = document.getElementById('lightbox-modal');
             if (!modal.classList.contains('hidden')) {
