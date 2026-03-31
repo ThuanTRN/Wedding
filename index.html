@@ -6,7 +6,6 @@
     <title>Thiệp Cưới | Ngọc Bích & Văn Thuân</title>
     
     <!-- Google Fonts for Typography matching -->
-    <link rel="icon" type="image/jpeg" href="image/2C3A7079.JPG">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pattaya&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -81,11 +80,11 @@
             font-family: 'Pattaya', cursive;
         }
 
-        /* Ambient Rise Animation for Overlay */
+        /* Ambient Rise Animation for Overlay - Updated to be solid white */
         @keyframes ambient-rise {
             0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
             100% { transform: translateY(-100vh) translateX(var(--sway)); opacity: 0; }
         }
 
@@ -108,20 +107,20 @@
     <!-- MÀN HÌNH CHỜ (WELCOME OVERLAY) ĐỂ KÍCH HOẠT NHẠC -->
     <div id="welcome-overlay" style="background:linear-gradient(to bottom right, #710001, #5a0001, #450001)" class="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden transition-opacity duration-1000">
         
-        <!-- Hiệu ứng chữ Hỷ bay -->
+        <!-- Hiệu ứng chữ Hỷ bay (Màu trắng rõ ràng) -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 1;">
-            <div class="absolute" style="left: 93.7%; bottom: -30px; color: rgba(255,255,255,0.1); font-size: 24px; --sway: 27px; animation: ambient-rise 12.6s ease-in-out -2.5s infinite;">囍</div>
-            <div class="absolute" style="left: 89.3%; bottom: -30px; color: rgba(255,255,255,0.15); font-size: 30px; --sway: 11px; animation: ambient-rise 13.2s ease-in-out -2.2s infinite;">囍</div>
-            <div class="absolute" style="left: 31.7%; bottom: -30px; color: rgba(255,255,255,0.08); font-size: 21px; --sway: 18px; animation: ambient-rise 17.4s ease-in-out -1.9s infinite;">囍</div>
-            <div class="absolute" style="left: 43.7%; bottom: -30px; color: rgba(255,255,255,0.12); font-size: 18px; --sway: 12px; animation: ambient-rise 21.7s ease-in-out -1.6s infinite;">囍</div>
-            <div class="absolute" style="left: 14.5%; bottom: -30px; color: rgba(255,255,255,0.1); font-size: 28px; --sway: -26px; animation: ambient-rise 18.9s ease-in-out -1.3s infinite;">囍</div>
-            <div class="absolute" style="left: 36.0%; bottom: -30px; color: rgba(255,255,255,0.18); font-size: 16px; --sway: -24px; animation: ambient-rise 15.2s ease-in-out -1s infinite;">囍</div>
-            <div class="absolute" style="left: 90.8%; bottom: -30px; color: rgba(255,255,255,0.05); font-size: 19px; --sway: 24px; animation: ambient-rise 19.5s ease-in-out -0.7s infinite;">囍</div>
-            <div class="absolute" style="left: 72.9%; bottom: -30px; color: rgba(255,255,255,0.1); font-size: 22px; --sway: -19px; animation: ambient-rise 21.1s ease-in-out -0.4s infinite;">囍</div>
-            <div class="absolute" style="left: 46.2%; bottom: -30px; color: rgba(255,255,255,0.14); font-size: 17px; --sway: -14px; animation: ambient-rise 21.4s ease-in-out -0.1s infinite;">囍</div>
-            <div class="absolute" style="left: 80.7%; bottom: -30px; color: rgba(255,255,255,0.09); font-size: 25px; --sway: 29px; animation: ambient-rise 15.1s ease-in-out 0.2s infinite;">囍</div>
-            <div class="absolute" style="left: 41.6%; bottom: -30px; color: rgba(255,255,255,0.1); font-size: 14px; --sway: 0px; animation: ambient-rise 13.3s ease-in-out 0.5s infinite;">囍</div>
-            <div class="absolute" style="left: 27.7%; bottom: -30px; color: rgba(255,255,255,0.13); font-size: 32px; --sway: -12px; animation: ambient-rise 13.1s ease-in-out 0.8s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 93.7%; bottom: -30px; color: #ffffff; font-size: 24px; --sway: 27px; animation: ambient-rise 12.6s ease-in-out -2.5s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 89.3%; bottom: -30px; color: #ffffff; font-size: 30px; --sway: 11px; animation: ambient-rise 13.2s ease-in-out -2.2s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 31.7%; bottom: -30px; color: #ffffff; font-size: 21px; --sway: 18px; animation: ambient-rise 17.4s ease-in-out -1.9s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 43.7%; bottom: -30px; color: #ffffff; font-size: 18px; --sway: 12px; animation: ambient-rise 21.7s ease-in-out -1.6s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 14.5%; bottom: -30px; color: #ffffff; font-size: 28px; --sway: -26px; animation: ambient-rise 18.9s ease-in-out -1.3s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 36.0%; bottom: -30px; color: #ffffff; font-size: 16px; --sway: -24px; animation: ambient-rise 15.2s ease-in-out -1s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 90.8%; bottom: -30px; color: #ffffff; font-size: 19px; --sway: 24px; animation: ambient-rise 19.5s ease-in-out -0.7s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 72.9%; bottom: -30px; color: #ffffff; font-size: 22px; --sway: -19px; animation: ambient-rise 21.1s ease-in-out -0.4s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 46.2%; bottom: -30px; color: #ffffff; font-size: 17px; --sway: -14px; animation: ambient-rise 21.4s ease-in-out -0.1s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 80.7%; bottom: -30px; color: #ffffff; font-size: 25px; --sway: 29px; animation: ambient-rise 15.1s ease-in-out 0.2s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 41.6%; bottom: -30px; color: #ffffff; font-size: 14px; --sway: 0px; animation: ambient-rise 13.3s ease-in-out 0.5s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 27.7%; bottom: -30px; color: #ffffff; font-size: 32px; --sway: -12px; animation: ambient-rise 13.1s ease-in-out 0.8s infinite;">囍</div>
         </div>
 
         <div style="z-index:10" class="relative">
@@ -171,8 +170,8 @@
         </div>
     </div>
 
-    <!-- AUDIO PLAYER - Ed Sheeran Perfect -->
-    <audio id="bg-music" loop>
+    <!-- AUDIO PLAYER - Ed Sheeran Perfect (Thêm preload và crossorigin) -->
+    <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
         <source src="https://files.catbox.moe/2s8jix.mp3" type="audio/mpeg">
     </audio>
 
@@ -357,7 +356,7 @@
                             </section>
                         </div>
 
-                        <!-- GUESTBOOK (NO AI) -->
+                        <!-- GUESTBOOK (SỔ LƯU BÚT THUẦN TÚY - Đã XÓA AI) -->
                         <section class="relative px-4 md:px-8 pb-12 md:pb-16 z-10 flex flex-col items-center">
                             <div class="text-center mb-6">
                                 <h2 class="text-[32px] md:text-[40px] custom-name-font">Sổ lưu bút</h2>
@@ -378,7 +377,7 @@
                                 </div>
                             </div>
 
-                            <!-- Comment List (Realtime) -->
+                            <!-- Danh sách lời chúc sẽ tự động tải từ LocalStorage -->
                             <div id="wishes-list" class="mt-8 w-full max-h-[400px] space-y-3 overflow-y-auto pr-2 mx-auto max-w-[600px]">
                                 <div class="text-center italic opacity-70 p-4 font-cormorant font-bold text-lg">Đang tải lời chúc...</div>
                             </div>
@@ -549,7 +548,7 @@
     </div>
 
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JAVASCRIPT LOGIC (Firebase + LocalStorage Fallback) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -558,17 +557,11 @@
         // 1. UI Modals Setup
         window.openModal = (id) => {
             const el = document.getElementById(id);
-            if(el) {
-                el.classList.remove('hidden');
-                // document.body.style.overflow = 'hidden'; 
-            }
+            if(el) el.classList.remove('hidden');
         };
         window.closeModal = (id) => {
             const el = document.getElementById(id);
-            if(el) {
-                el.classList.add('hidden');
-                // document.body.style.overflow = 'auto';
-            }
+            if(el) el.classList.add('hidden');
         };
 
         // Escaping HTML to prevent XSS
@@ -586,7 +579,7 @@
         let db = null;
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'demo-wedding-app';
 
-        // --- ĐỊNH NGHĨA CÁC HÀM XỬ LÝ TRƯỚC ĐỂ TRÁNH LỖI NẾU FIREBASE BỊ NGẮT --- //
+        // --- ĐỊNH NGHĨA CÁC HÀM XỬ LÝ --- //
 
         // Render Wishes to DOM
         function renderWishes(wishes) {
@@ -664,11 +657,12 @@
                     const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
                     await addDoc(wishesRef, wishData);
                 } else {
-                    // Fallback Local Memory
+                    // Fallback Local Storage (Saves on browser reload for Vercel demo)
                     window.allWishes.unshift(wishData);
+                    localStorage.setItem('wedding_wishes', JSON.stringify(window.allWishes));
                     renderWishes(window.allWishes);
                 }
-                textInput.value = ''; // clear only the wish box
+                textInput.value = ''; 
             } catch (error) {
                 console.error("Lỗi gửi lời chúc:", error);
             } finally {
@@ -703,14 +697,14 @@
                     const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
                     await addDoc(rsvpsRef, rsvpData);
                 } else {
-                    // Fallback Local Memory
+                    // Fallback Local Storage (Saves on browser reload for Vercel demo)
                     window.allRsvps.unshift(rsvpData);
+                    localStorage.setItem('wedding_rsvps', JSON.stringify(window.allRsvps));
                     if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
                         renderRsvps(); 
                     }
                 }
                 
-                // Mở thông báo thành công
                 window.closeModal('rsvp-modal');
                 window.openModal('thank-you-modal');
                 nameInput.value = '';
@@ -741,7 +735,6 @@
         };
 
         // --- KHỞI TẠO FIREBASE AN TOÀN --- //
-
         const firebaseConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : '{}';
         let firebaseConfig;
         try { firebaseConfig = JSON.parse(firebaseConfigStr); } catch(e) { firebaseConfig = {}; }
@@ -775,11 +768,13 @@
                 initAuth();
 
             } catch (error) {
-                console.warn("Lỗi khởi tạo Firebase. Tự động chuyển sang chế độ lưu trữ cục bộ.", error);
+                console.warn("Lỗi khởi tạo Firebase. Chuyển sang Local Storage.", error);
             }
         } else {
-            console.warn("Môi trường thiếu API Key Firebase. Tự động chuyển sang chế độ lưu trữ cục bộ.");
-            // Kích hoạt render bảng giả lập
+            console.warn("Không tìm thấy Firebase Config. Sử dụng Local Storage để lưu trữ tạm thời.");
+            // Lấy dữ liệu từ Local Storage nếu đã lưu trước đó (Mô phỏng Database cho Vercel)
+            window.allWishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+            window.allRsvps = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
             renderWishes(window.allWishes);
             renderRsvps();
         }
@@ -857,7 +852,7 @@
                 isPlaying = true;
                 musicToggleBtn.classList.remove('paused');
             }).catch((err) => {
-                console.log("Audio play prevented:", err);
+                console.log("Audio play prevented by browser:", err);
             });
         });
 
