@@ -632,7 +632,7 @@
             <input id="groom-password" type="password" placeholder="*********" class="w-full mb-2 p-3 border rounded focus:outline-none focus:ring-1 focus:ring-[#710001] text-center tracking-widest">
             <p id="groom-error" class="text-red-500 text-xs hidden mb-4 text-center font-bold">Mật khẩu không đúng</p>
             
-            <button onclick="window.handleGroomLogin()" id="btn-groom-login" class="w-full py-3 bg-[#710001] text-white font-bold rounded shadow-lg hover:bg-red-900 transition mt-2">
+            <button onclick="window.handleGroomLogin()" class="w-full py-3 bg-[#710001] text-white font-bold rounded shadow-lg hover:bg-red-900 transition mt-2">
                 Đăng nhập
             </button>
         </div>
@@ -676,261 +676,11 @@
     </div>
 
 
-    <!-- JAVASCRIPT LOGIC (Firebase + Encapsulation + Security enhancements) -->
+    <!-- JAVASCRIPT LOGIC (Firebase + LocalStorage Fallback) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Sử dụng một hàm IIFE (Immediately Invoked Function Expression) để che giấu biến khỏi biến toàn cục
-        (() => {
-            // Hàm khử trùng (Sanitize Input) chặn XSS mạnh mẽ hơn
-            function escapeHtml(str) {
-                if(typeof str !== 'string') return '';
-                return str.replace(/[&<>'"]/g, match => 
-                    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[match]
-                );
-            }
-
-            // --- BẢO MẬT MẬT KHẨU BẰNG WEB CRYPTO API ---
-            // Thay vì dùng '92598', đây là mã hash SHA-256 của '92598'
-            const GROOM_PWD_HASH = '6e5e8061a4f00db12e6c4068565e330a89d7b9264faeb2db7ff26b64b18c5e01';
-            
-            async function hashPassword(pwd) {
-                const encoder = new TextEncoder();
-                const data = encoder.encode(pwd);
-                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-                const hashArray = Array.from(new Uint8Array(hashBuffer));
-                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            }
-
-            // Biến nội bộ, không lộ ra window (người dùng gõ window.allRsvps sẽ không thấy được nữa)
-            let _allRsvps = []; 
-            let _allWishes = [];
-            let useFirebase = false;
-            let db = null;
-            
-            // --- KHỞI TẠO FIREBASE ---
-            const firebaseConfig = {
-                apiKey: "AIzaSyDQKPgkm72njQJN75b7n99H2duXpH9lf5M",
-                authDomain: "wedding-thuan-bich.firebaseapp.com",
-                projectId: "wedding-thuan-bich",
-                storageBucket: "wedding-thuan-bich.firebasestorage.app",
-                messagingSenderId: "706546479577",
-                appId: "1:706546479577:web:67258277f0d77ab3d7a9c8",
-                measurementId: "G-E5ESFRVVTV"
-            };
-            const appId = 'thuan-bich-wedding'; 
-
-            function renderWishes(wishes) {
-                const listEl = document.getElementById('wishes-list');
-                if(wishes.length === 0) {
-                    listEl.innerHTML = '<div class="text-center italic opacity-70 p-4 font-cormorant font-bold text-lg">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé!</div>';
-                    return;
-                }
-
-                listEl.innerHTML = wishes.map(w => `
-                    <div class="rounded-lg border border-[#710001]/20 p-4 text-sm bg-white shadow-sm">
-                        <div class="flex items-start justify-between font-bold text-[#710001]">
-                            <span class="text-[16px]">${escapeHtml(w.name)}</span>
-                            <span class="text-[12px] opacity-60 font-normal uppercase tracking-wider">${new Date(w.timestamp).toLocaleString('vi-VN')}</span>
-                        </div>
-                        <p class="mt-2 leading-relaxed font-cormorant text-[14px] font-bold text-gray-800">${escapeHtml(w.text)}</p>
-                    </div>
-                `).join('');
-            }
-
-            function renderRsvps() {
-                const tbody = document.getElementById('rsvp-table-body');
-                let total = 0, attending = 0, notAttending = 0;
-
-                if(_allRsvps.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-gray-500 italic">Chưa có khách nào xác nhận.</td></tr>';
-                } else {
-                    tbody.innerHTML = _allRsvps.map((r, index) => {
-                        total++;
-                        const isComing = r.attending === 'yes';
-                        if(isComing) attending += parseInt(r.count || 0); else notAttending++;
-                        
-                        const rowClass = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
-                        const statusBadge = isComing 
-                            ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Sẽ tham dự</span>' 
-                            : '<span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">Không đến</span>';
-
-                        return `
-                        <tr class="${rowClass} hover:bg-red-50 transition-colors">
-                            <td class="p-4 border-r font-medium text-gray-800">${escapeHtml(r.name)}</td>
-                            <td class="p-4 border-r text-center font-bold">${escapeHtml(r.count)}</td>
-                            <td class="p-4 border-r">${statusBadge}</td>
-                            <td class="p-4 text-xs text-gray-500">${new Date(r.timestamp).toLocaleString('vi-VN')}</td>
-                        </tr>`;
-                    }).join('');
-                }
-
-                document.getElementById('rsvp-summary-total').innerText = `Tổng khách: ${total}`;
-                document.getElementById('rsvp-summary-attending').innerText = `Sẽ tham dự: ${attending}`;
-                document.getElementById('rsvp-summary-not').innerText = `Không thể tham dự: ${notAttending}`;
-            }
-
-            // Gắn các hàm giao tiếp trực tiếp vào window nhưng logic ở bên trong bảo mật
-            window.handleWishSubmit = async () => {
-                const nameInput = document.getElementById('wish-name');
-                const textInput = document.getElementById('wish-result');
-                const btn = document.getElementById('submit-wish-btn');
-
-                const name = nameInput.value.trim();
-                const text = textInput.value.trim();
-
-                if(!name || !text) {
-                    alert("Vui lòng điền tên và lời chúc của bạn.");
-                    return;
-                }
-
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ĐANG GỬI...';
-
-                const wishData = { name, text, timestamp: Date.now() };
-
-                try {
-                    if (useFirebase && db) {
-                        const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
-                        await addDoc(wishesRef, wishData);
-                    } else {
-                        _allWishes.unshift(wishData);
-                        localStorage.setItem('wedding_wishes', JSON.stringify(_allWishes));
-                        renderWishes(_allWishes);
-                    }
-                    textInput.value = ''; 
-                } catch (error) {
-                    console.error("Lỗi gửi lời chúc:", error);
-                } finally {
-                    btn.disabled = false;
-                    btn.innerHTML = 'Gửi lời chúc';
-                }
-            };
-
-            window.handleRsvpSubmit = async () => {
-                const nameInput = document.getElementById('rsvp-name');
-                const countInput = document.getElementById('rsvp-count');
-                const statusInput = document.getElementById('rsvp-status');
-                const btn = document.getElementById('btn-submit-rsvp');
-
-                const name = nameInput.value.trim();
-                const count = countInput.value;
-                const status = statusInput.value;
-
-                if(!name) {
-                    alert("Vui lòng nhập tên của bạn.");
-                    return;
-                }
-
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Đang xử lý...';
-
-                const rsvpData = { name, count, attending: status, timestamp: Date.now() };
-
-                try {
-                    if (useFirebase && db) {
-                        const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
-                        await addDoc(rsvpsRef, rsvpData);
-                    } else {
-                        _allRsvps.unshift(rsvpData);
-                        localStorage.setItem('wedding_rsvps', JSON.stringify(_allRsvps));
-                        if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
-                            renderRsvps(); 
-                        }
-                    }
-                    
-                    window.closeModal('rsvp-modal');
-                    window.openModal('thank-you-modal');
-                    nameInput.value = '';
-                    countInput.value = '1';
-                    
-                } catch (error) {
-                    console.error("Lỗi gửi RSVP:", error);
-                } finally {
-                    btn.disabled = false;
-                    btn.innerHTML = 'Gửi Xác Nhận';
-                }
-            };
-
-            window.handleGroomLogin = async () => {
-                const pwd = document.getElementById('groom-password').value;
-                const err = document.getElementById('groom-error');
-                const btn = document.getElementById('btn-groom-login');
-
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang kiểm tra...';
-                
-                try {
-                    const hashedInput = await hashPassword(pwd);
-                    if(hashedInput === GROOM_PWD_HASH) {
-                        err.classList.add('hidden');
-                        document.getElementById('groom-password').value = ''; 
-                        window.closeModal('groom-login-modal');
-                        window.openModal('groom-dashboard-modal');
-                        renderRsvps();
-                    } else {
-                        err.classList.remove('hidden');
-                    }
-                } catch(e) {
-                    console.error(e);
-                } finally {
-                    btn.disabled = false;
-                    btn.innerHTML = 'Đăng nhập';
-                }
-            };
-
-            if (firebaseConfig && firebaseConfig.apiKey) {
-                try {
-                    const app = initializeApp(firebaseConfig);
-                    db = getFirestore(app);
-                    useFirebase = true;
-                    setupRealtimeListeners();
-                } catch (error) {
-                    console.warn("Lỗi khởi tạo Firebase. Chuyển sang Local Storage.", error);
-                    setupLocalStorage();
-                }
-            } else {
-                setupLocalStorage();
-            }
-
-            function setupLocalStorage() {
-                _allWishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
-                _allRsvps = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
-                renderWishes(_allWishes);
-                renderRsvps();
-            }
-
-            function setupRealtimeListeners() {
-                if (!useFirebase) return;
-
-                const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
-                onSnapshot(wishesRef, (snapshot) => {
-                    const wishes = [];
-                    snapshot.forEach(doc => wishes.push({ id: doc.id, ...doc.data() }));
-                    wishes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                    _allWishes = wishes;
-                    renderWishes(wishes);
-                }, (error) => {
-                    console.error("Error fetching wishes:", error);
-                });
-
-                const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
-                onSnapshot(rsvpsRef, (snapshot) => {
-                    const rsvps = [];
-                    snapshot.forEach(doc => rsvps.push({ id: doc.id, ...doc.data() }));
-                    rsvps.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                    _allRsvps = rsvps;
-                    if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
-                        renderRsvps(); 
-                    }
-                }, (error) => {
-                    console.error("Error fetching RSVPs:", error);
-                });
-            }
-        })();
-
-        // Các hàm giao diện UI được giữ nguyên (Mở đóng modal)
         window.openModal = (id) => {
             const el = document.getElementById(id);
             if(el) el.classList.remove('hidden');
@@ -939,6 +689,225 @@
             const el = document.getElementById(id);
             if(el) el.classList.add('hidden');
         };
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>'"]/g, match => 
+                ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[match]
+            );
+        }
+
+        window.allRsvps = []; 
+        window.allWishes = [];
+        let useFirebase = false;
+        let db = null;
+        
+        // --- KHỞI TẠO FIREBASE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQKPgkm72njQJN75b7n99H2duXpH9lf5M",
+            authDomain: "wedding-thuan-bich.firebaseapp.com",
+            projectId: "wedding-thuan-bich",
+            storageBucket: "wedding-thuan-bich.firebasestorage.app",
+            messagingSenderId: "706546479577",
+            appId: "1:706546479577:web:67258277f0d77ab3d7a9c8",
+            measurementId: "G-E5ESFRVVTV"
+        };
+        const appId = 'thuan-bich-wedding'; 
+
+        function renderWishes(wishes) {
+            const listEl = document.getElementById('wishes-list');
+            if(wishes.length === 0) {
+                listEl.innerHTML = '<div class="text-center italic opacity-70 p-4 font-cormorant font-bold text-lg">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé!</div>';
+                return;
+            }
+
+            listEl.innerHTML = wishes.map(w => `
+                <div class="rounded-lg border border-[#710001]/20 p-4 text-sm bg-white shadow-sm">
+                    <div class="flex items-start justify-between font-bold text-[#710001]">
+                        <span class="text-[16px]">${escapeHtml(w.name)}</span>
+                        <span class="text-[12px] opacity-60 font-normal uppercase tracking-wider">${new Date(w.timestamp).toLocaleString('vi-VN')}</span>
+                    </div>
+                    <p class="mt-2 leading-relaxed font-cormorant text-[14px] font-bold text-gray-800">${escapeHtml(w.text)}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderRsvps() {
+            const tbody = document.getElementById('rsvp-table-body');
+            let total = 0, attending = 0, notAttending = 0;
+
+            if(window.allRsvps.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-gray-500 italic">Chưa có khách nào xác nhận.</td></tr>';
+            } else {
+                tbody.innerHTML = window.allRsvps.map((r, index) => {
+                    total++;
+                    const isComing = r.attending === 'yes';
+                    if(isComing) attending += parseInt(r.count || 0); else notAttending++;
+                    
+                    const rowClass = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                    const statusBadge = isComing 
+                        ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Sẽ tham dự</span>' 
+                        : '<span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">Không đến</span>';
+
+                    return `
+                    <tr class="${rowClass} hover:bg-red-50 transition-colors">
+                        <td class="p-4 border-r font-medium text-gray-800">${escapeHtml(r.name)}</td>
+                        <td class="p-4 border-r text-center font-bold">${escapeHtml(r.count)}</td>
+                        <td class="p-4 border-r">${statusBadge}</td>
+                        <td class="p-4 text-xs text-gray-500">${new Date(r.timestamp).toLocaleString('vi-VN')}</td>
+                    </tr>`;
+                }).join('');
+            }
+
+            document.getElementById('rsvp-summary-total').innerText = `Tổng khách: ${total}`;
+            document.getElementById('rsvp-summary-attending').innerText = `Sẽ tham dự: ${attending}`;
+            document.getElementById('rsvp-summary-not').innerText = `Không thể tham dự: ${notAttending}`;
+        }
+
+        window.handleWishSubmit = async () => {
+            const nameInput = document.getElementById('wish-name');
+            const textInput = document.getElementById('wish-result');
+            const btn = document.getElementById('submit-wish-btn');
+
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+
+            if(!name || !text) {
+                alert("Vui lòng điền tên và lời chúc của bạn.");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ĐANG GỬI...';
+
+            const wishData = { name, text, timestamp: Date.now() };
+
+            try {
+                if (useFirebase) {
+                    const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
+                    await addDoc(wishesRef, wishData);
+                } else {
+                    window.allWishes.unshift(wishData);
+                    localStorage.setItem('wedding_wishes', JSON.stringify(window.allWishes));
+                    renderWishes(window.allWishes);
+                }
+                textInput.value = ''; 
+            } catch (error) {
+                console.error("Lỗi gửi lời chúc:", error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'GỬI LỜI CHÚC';
+            }
+        };
+
+        window.handleRsvpSubmit = async () => {
+            const nameInput = document.getElementById('rsvp-name');
+            const countInput = document.getElementById('rsvp-count');
+            const statusInput = document.getElementById('rsvp-status');
+            const btn = document.getElementById('btn-submit-rsvp');
+
+            const name = nameInput.value.trim();
+            const count = countInput.value;
+            const status = statusInput.value;
+
+            if(!name) {
+                alert("Vui lòng nhập tên của bạn.");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Đang xử lý...';
+
+            const rsvpData = { name, count, attending: status, timestamp: Date.now() };
+
+            try {
+                if (useFirebase) {
+                    const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
+                    await addDoc(rsvpsRef, rsvpData);
+                } else {
+                    window.allRsvps.unshift(rsvpData);
+                    localStorage.setItem('wedding_rsvps', JSON.stringify(window.allRsvps));
+                    if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
+                        renderRsvps(); 
+                    }
+                }
+                
+                window.closeModal('rsvp-modal');
+                window.openModal('thank-you-modal');
+                nameInput.value = '';
+                countInput.value = '1';
+                
+            } catch (error) {
+                console.error("Lỗi gửi RSVP:", error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Gửi Xác Nhận';
+            }
+        };
+
+        window.handleGroomLogin = () => {
+            const pwd = document.getElementById('groom-password').value;
+            const err = document.getElementById('groom-error');
+            
+            if(pwd === '92598') {
+                err.classList.add('hidden');
+                document.getElementById('groom-password').value = ''; 
+                window.closeModal('groom-login-modal');
+                window.openModal('groom-dashboard-modal');
+                renderRsvps();
+            } else {
+                err.classList.remove('hidden');
+            }
+        };
+
+        if (firebaseConfig && firebaseConfig.apiKey) {
+            try {
+                const app = initializeApp(firebaseConfig);
+                // BỎ AUTH - Dùng thẳng Database
+                db = getFirestore(app);
+                useFirebase = true;
+                setupRealtimeListeners();
+            } catch (error) {
+                console.warn("Lỗi khởi tạo Firebase. Chuyển sang Local Storage.", error);
+                setupLocalStorage();
+            }
+        } else {
+            setupLocalStorage();
+        }
+
+        function setupLocalStorage() {
+            window.allWishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
+            window.allRsvps = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
+            renderWishes(window.allWishes);
+            renderRsvps();
+        }
+
+        function setupRealtimeListeners() {
+            if (!useFirebase) return;
+
+            const wishesRef = collection(db, 'artifacts', appId, 'public', 'data', 'wishes');
+            onSnapshot(wishesRef, (snapshot) => {
+                const wishes = [];
+                snapshot.forEach(doc => wishes.push({ id: doc.id, ...doc.data() }));
+                wishes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                window.allWishes = wishes;
+                renderWishes(wishes);
+            }, (error) => {
+                console.error("Error fetching wishes:", error);
+            });
+
+            const rsvpsRef = collection(db, 'artifacts', appId, 'public', 'data', 'rsvps');
+            onSnapshot(rsvpsRef, (snapshot) => {
+                const rsvps = [];
+                snapshot.forEach(doc => rsvps.push({ id: doc.id, ...doc.data() }));
+                rsvps.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                window.allRsvps = rsvps;
+                if(!document.getElementById('groom-dashboard-modal').classList.contains('hidden')) {
+                    renderRsvps(); 
+                }
+            }, (error) => {
+                console.error("Error fetching RSVPs:", error);
+            });
+        }
     </script>
 
     <!-- GENERAL INTERACTION SCRIPT & GEMINI API -->
@@ -980,7 +949,6 @@
                 const resultText = fortuneList[randomIndex];
 
             document.getElementById('fortune-loading').classList.add('hidden');
-            // Sanitize input when rendering back into HTML to prevent XSS
             document.getElementById('fortune-user-name').innerText = nameInput;
             document.getElementById('fortune-text').innerHTML = resultText.replace(/\n/g, '<br>');
             document.getElementById('fortune-result-box').classList.remove('hidden');
