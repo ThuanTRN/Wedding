@@ -8,8 +8,7 @@
     <!-- Google Fonts for Typography matching -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pattaya&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600&Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="image/favicon.png">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,10 +24,10 @@
                         'wedding-bg': '#fff0e7',
                     },
                     fontFamily: {
-                        'pattaya': ['Pattaya', 'cursive'],
-                        'serif': ['Montserrat', 'Times', 'serif'],
-                        'cormorant': ['Montserrat', 'serif'],
-                        'sans': ['Montserrat', 'sans-serif'],
+                        'pattaya': ['Great Vibes', 'cursive'],
+                        'serif': ['"Times New Roman"', 'Times', 'serif'],
+                        'cormorant': ['Times New Roman', 'serif'],
+                        'sans': ['Times New Roman', 'sans-serif'],
                     }
                 }
             }
@@ -72,13 +71,21 @@
         }
 
         .custom-title-font {
-            font-family: 'Pattaya', cursive;
+            font-family: "Great Vibes", cursive;
             font-size: clamp(36px, 8vw, 52px);
             line-height: 1.11;
         }
         
         .custom-name-font {
-            font-family: 'Pattaya', cursive;
+            font-family: "Great Vibes", cursive;
+        }
+
+        .custom-montserrat {
+           font-family: "Montserrat", sans-serif;
+        }
+
+        .custom-lora {
+            font-family: "Lora", serif;
         }
 
         /* Ambient Rise Animation for Overlay - Solid White */
@@ -165,26 +172,26 @@
         
         <!-- Hiệu ứng chữ Hỷ bay -->
         <div id="ambient-bg" class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 1;">
-            <div class="absolute font-bold" style="left: 93.7%; bottom: -30px; color: #ffffff; font-size: 24px; --sway: 27px; animation: ambient-rise 12.6s ease-in-out -2.5s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 89.3%; bottom: -30px; color: #ffffff; font-size: 30px; --sway: 11px; animation: ambient-rise 13.2s ease-in-out -2.2s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 31.7%; bottom: -30px; color: #ffffff; font-size: 21px; --sway: 18px; animation: ambient-rise 17.4s ease-in-out -1.9s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 43.7%; bottom: -30px; color: #ffffff; font-size: 18px; --sway: 12px; animation: ambient-rise 21.7s ease-in-out -1.6s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 14.5%; bottom: -30px; color: #ffffff; font-size: 28px; --sway: -26px; animation: ambient-rise 18.9s ease-in-out -1.3s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 36.0%; bottom: -30px; color: #ffffff; font-size: 16px; --sway: -24px; animation: ambient-rise 15.2s ease-in-out -1s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 90.8%; bottom: -30px; color: #ffffff; font-size: 19px; --sway: 24px; animation: ambient-rise 19.5s ease-in-out -0.7s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 72.9%; bottom: -30px; color: #ffffff; font-size: 22px; --sway: -19px; animation: ambient-rise 21.1s ease-in-out -0.4s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 46.2%; bottom: -30px; color: #ffffff; font-size: 17px; --sway: -14px; animation: ambient-rise 21.4s ease-in-out -0.1s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 80.7%; bottom: -30px; color: #ffffff; font-size: 25px; --sway: 29px; animation: ambient-rise 15.1s ease-in-out 0.2s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 41.6%; bottom: -30px; color: #ffffff; font-size: 14px; --sway: 0px; animation: ambient-rise 13.3s ease-in-out 0.5s infinite;">囍</div>
-            <div class="absolute font-bold" style="left: 27.7%; bottom: -30px; color: #ffffff; font-size: 32px; --sway: -12px; animation: ambient-rise 13.1s ease-in-out 0.8s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 43.7%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 24px; --sway: 27px; animation: ambient-rise 5.6s ease-in-out -1.5s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 49.3%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 30px; --sway: 11px; animation: ambient-rise 6.2s ease-in-out -2.2s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 31.7%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 21px; --sway: 18px; animation: ambient-rise 10.4s ease-in-out -1.9s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 43.7%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 18px; --sway: 12px; animation: ambient-rise 12.7s ease-in-out -1.6s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 14.5%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 28px; --sway: -26px; animation: ambient-rise 15.9s ease-in-out -1.3s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 36.0%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 16px; --sway: -24px; animation: ambient-rise 15.2s ease-in-out -1s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 90.8%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 19px; --sway: 24px; animation: ambient-rise 14.5s ease-in-out -0.7s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 72.9%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 22px; --sway: -19px; animation: ambient-rise 18.1s ease-in-out -0.4s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 46.2%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 17px; --sway: -14px; animation: ambient-rise 16.4s ease-in-out -0.1s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 80.7%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 25px; --sway: 29px; animation: ambient-rise 15.1s ease-in-out 0.2s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 41.6%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 14px; --sway: 0px; animation: ambient-rise 13.3s ease-in-out 0.5s infinite;">囍</div>
+            <div class="absolute font-bold" style="left: 27.7%; bottom: -30px; color: rgba(255, 255, 255, 0.4); font-size: 32px; --sway: -12px; animation: ambient-rise 13.1s ease-in-out 0.8s infinite;">囍</div>
         </div>
 
         <div style="z-index:10" class="relative">
-            <div id="welcome-card" class="relative w-[340px] sm:w-[340px] md:w-[520px] lg:w-[600px] reveal reveal-scale active">
+            <div id="welcome-card" class="relative w-[370px] sm:w-[350px] md:w-[520px] lg:w-[600px] reveal reveal-scale active">
                 
                 <!-- Con dấu Hỷ ở giữa -->
                 <div id="center-seal" style="top:0px;width:56px;height:56px;transform:translate(-50%, -50%);background:radial-gradient(circle at 30% 30%, #710001, rgb(83, 0, 0));animation:seal-pulse 2s ease-in-out infinite" class="absolute left-1/2 rounded-full flex items-center justify-center z-30">
-                    <div style="background-color:#FFF0E7;opacity:0.9;-webkit-mask-image:url('https://chungdoi.com/images/themes/songlong-red/chinese_happiness.webp');-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url('https://chungdoi.com/images/themes/songlong-red/chinese_happiness.webp');mask-size:contain;mask-repeat:no-repeat;mask-position:center" class="w-8 h-8"></div>
+                    <div style="background-color:#FFF0E7;opacity:0.9;-webkit-mask-image:url('/image/chinese_happiness.png');-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;mask-image:url('/image/chinese_happiness.png');mask-size:contain;mask-repeat:no-repeat;mask-position:center" class="w-8 h-8"></div>
                 </div>
 
                 <div class="relative rounded-lg" style="box-shadow:0 25px 60px -12px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.2), 0 0 40px rgba(113, 0, 1, 0.15)">
@@ -199,25 +206,25 @@
                         <img src="https://chungdoi.com/images/themes/songphung-red/HOA.webp" alt="" aria-hidden="true" class="absolute pointer-events-none w-[100px] md:w-[140px] -top-[15px] -right-[15px] md:-top-[20px] md:-right-[20px] opacity-60 rotate-180">
                         
                         <div id="welcome-content" class="relative z-10 text-center px-6 pt-20 pb-12 md:pt-24 md:pb-12 transition-opacity duration-500">
-                            <h1 class="custom-title-font text-[#710001] text-3xl sm:text-5xl mb-2 leading-tight uppercase font-bold">Ngọc Bích<br><span class="text-2xl sm:text-3xl lowercase font-normal">&</span><br>Văn Thuân</h1>
+                            <h1 class="custom-title-font text-[#710001] text-3xl sm:text-5xl mb-2 leading-tight font-bold">Ngọc Bích<br><span class="text-2xl sm:text-3xl lowercase font-normal">&</span><br>Văn Thuân</h1>
                             
                             <div class="flex items-center justify-center gap-3 mb-4">
-                                <div style="background:linear-gradient(to right, transparent, #710001)" class="w-10 h-px"></div>
-                                <span style="color:#710001;opacity:0.7" class="text-sm">❦</span>
-                                <div style="background:linear-gradient(to left, transparent, #710001)" class="w-10 h-px"></div>
+                                <div style="background:linear-gradient(to right, transparent, #710001)" class="w-[60px] h-px"></div>
+                                <span style="color:#710001;opacity:0.7" class="text-2xl">❦</span>
+                                <div style="background:linear-gradient(to left, transparent, #710001)" class="w-[60px] h-px"></div>
                             </div>
                             
-                            <div class="font-cormorant text-[#710001]/90 text-[18px] sm:text-[20px] mb-5 font-bold">11 tháng 4, 2026</div>
+                            <div class="custom-lora text-[#710001]/90 text-[18px] sm:text-[20px] mb-5 font-bold">11 tháng 4, 2026</div>
                             
-                            <div class="mb-8">
-                                <p class="font-cormorant text-[#710001]/90 text-[18px] sm:text-[20px] mb-2 font-bold">Thân Mời</p>
+                            <div class="mb-6">
+                                <p class="custom-lora text-[#710001]/90 text-[18px] sm:text-[20px] mb-2 font-bold">Thân Mời</p>
                                 <div style="background-color:rgba(113, 0, 1, 0.1)" class="inline-block px-6 py-2 rounded-xl mb-2">
-                                    <h2 class="font-cormorant text-[#710001] text-[16px] sm:text-sm font-bold">Bạn và người thương</h2>
+                                    <h2 class="custom-lora text-lg sm:text-xl font-semibold sm:font-medium">Bạn và người thương</h2>
                                 </div>
-                                <p class="font-cormorant text-[#710001]/90 text-[16px] sm:text-[18px] font-bold">đến dự buổi tiệc chung vui cùng gia đình</p>
+                                <p class="custom-lora text-[#710001]/90 text-[16px] font-light">đến dự buổi tiệc chung vui cùng gia đình</p>
                             </div>
                             
-                            <button id="open-invitation" style="background-color:#710001;color:#FFF0E7;box-shadow:0 4px 14px rgba(113, 0, 1, 0.35);" class="relative px-10 py-3 text-lg font-cormorant font-bold rounded-full shadow-lg overflow-hidden transition-transform hover:scale-105 active:scale-95 flex items-center justify-center mx-auto cursor-pointer">
+                            <button id="open-invitation" style="background-color:#710001;color:#FFF0E7;box-shadow:0 4px 14px rgba(113, 0, 1, 0.35);" class="relative px-10 py-3 text-lg custom-lora font-bold rounded-full shadow-lg overflow-hidden transition-transform hover:scale-105 active:scale-95 flex items-center justify-center mx-auto cursor-pointer">
                                 <span>Mở thiệp</span>
                                 <div style="background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);animation:shine 3s ease-in-out infinite" class="absolute top-0 h-full w-8 pointer-events-none"></div>
                             </button>
@@ -260,18 +267,18 @@
                     </div>
 
                     <!-- CONTENT WRAPPER -->
-                    <div class="relative w-full max-w-[480px] md:max-w-[900px] z-10 mx-auto">
+                    <div class="relative w-full md:max-w-[900px] z-10 mx-auto">
                         
                         <!-- HEADER SECTION -->
                         <header class="relative flex flex-col items-center justify-center text-center z-10 pt-12 md:pt-16 pb-[200px] md:pb-[240px]">
-                            <div class="w-full text-left pl-6 md:pl-8 md:ml-[80px] uppercase text-wedding-red custom-title-font mb-6 md:mb-8 reveal reveal-left">
+                            <div class="w-full text-left pl-6 md:pl-8 md:ml-[80px] text-wedding-red custom-title-font mb-6 md:mb-8 reveal reveal-left">
                                 <div class="ml-[15px]">Ngọc Bích</div>
                                 <div class="ml-[50px] mt-[10px]">Văn Thuân</div>
                             </div>
                             
                             <!-- Phoenix Center Graphic -->
                             <div class="relative w-full flex items-center justify-center mb-4 md:mb-6 h-[260px] md:h-[488px] reveal reveal-scale">
-                                <div class="absolute w-full h-[110px] md:h-[206px] bg-wedding-red z-0" style="top: 50%; transform: translateY(-50%);"></div>
+                                <div class="absolute w-full h-[110px] md:h-[206px] bg-wedding-red z-0" style="top: 50%; transform: translateY(0);"></div>
                                 
                                 <div class="absolute left-[-90px] md:left-[-169px] top-0 w-[230px] md:w-[431px] h-[480px] md:h-[900px] z-10">
                                     <img alt="Phoenix Left" class="w-full h-full object-contain" src="https://chungdoi.com/images/themes/songphung-red/Phuong%202.webp" style="object-position: left center;">
@@ -294,44 +301,44 @@
                             </div>
                             
                             <div class="relative flex flex-col items-center gap-6 md:gap-8 text-center mb-12 md:mb-16">
-                                <h2 class="uppercase font-bold text-[24px] md:text-[28px] font-serif tracking-wider relative z-10 reveal reveal-up">
+                                <h2 class="uppercase font-bold text-[20px] md:text-[24px] font-serif tracking-wider relative z-10 reveal reveal-up">
                                     THÔNG TIN LỄ CƯỚI
                                 </h2>
                                 
                                 <div class="w-full flex items-start justify-center gap-3 md:gap-8 font-cormorant reveal reveal-up">
                                     <div class="flex-1 flex flex-col items-center gap-1 text-center max-w-[160px] md:max-w-[280px]">
-                                        <span class="text-[14px] md:text-[15px]">Ông Bà</span>
-                                        <span class="text-[14px] md:text-[16px] font-bold whitespace-nowrap">Trần Văn Sỹ</span>
-                                        <span class="text-[14px] md:text-[16px] font-bold whitespace-nowrap">Nguyễn Thị Nguyệt</span>
+                                        <span class="text-[16px] md:text-[15px]">Ông Bà</span>
+                                        <span class="text-[16px] md:text-[16px] font-bold whitespace-nowrap">Trần Văn Sỹ</span>
+                                        <span class="text-[16px] md:text-[16px] font-bold whitespace-nowrap">Nguyễn Thị Nguyệt</span>
                                         <div class="text-[14px] md:text-[16px] mt-1 leading-tight">Tháp Dương - Trung Kênh - Bắc Ninh</div>
                                     </div>
                                     <div class="w-[1px] h-[80px] self-center bg-wedding-red"></div>
                                     <div class="flex-1 flex flex-col items-center gap-1 text-center max-w-[160px] md:max-w-[280px]">
-                                        <span class="text-[14px] md:text-[15px]">Ông Bà</span>
-                                        <span class="text-[14px] md:text-[16px] font-bold whitespace-nowrap">Nguyễn Ngọc Đãi</span>
-                                        <span class="text-[14px] md:text-[16px] font-bold whitespace-nowrap">Trương Thị Đáng</span>
-                                        <div class="text-[14px] md:text-[14px] mt-1 leading-tight">Hương Chi - Lương Tài - Bắc Ninh</div>
+                                        <span class="text-[16px] md:text-[15px]">Ông Bà</span>
+                                        <span class="text-[16px] md:text-[16px] font-bold whitespace-nowrap">Nguyễn Ngọc Đãi</span>
+                                        <span class="text-[16px] md:text-[16px] font-bold whitespace-nowrap">Trương Thị Đáng</span>
+                                        <div class="text-[14px] md:text-[16px] mt-1 leading-tight">Hương Chi - Lương Tài - Bắc Ninh</div>
                                     </div>
                                 </div>
 
                                 <div class="flex flex-col items-center gap-2 w-full mt-4 reveal reveal-up">
-                                    <h3 class="custom-name-font text-[40px] leading-none">Nguyễn Thị Ngọc Bích</h3>
+                                    <h3 class="custom-name-font text-[64px] leading-none">Ngọc Bích</h3>
                                     <div class="text-[35px] md:text-[48px] custom-name-font my-2">&</div>
-                                    <h3 class="custom-name-font text-[40px] leading-none">Trần Văn Thuân</h3>
+                                    <h3 class="custom-name-font text-[64px] leading-none">Văn Thuân</h3>
                                 </div>
 
                                 <div class="flex flex-col items-center gap-3 mt-6 font-cormorant font-bold reveal reveal-up">
-                                    <div class="text-[18px] md:text-[16px] text-center">LỄ THÀNH HÔN ĐƯỢC CỬ HÀNH <br>TẠI TƯ GIA</div>
-                                    <p class="text-[18px] md:text-[15px] uppercase">VÀO LÚC 10:00</p>
+                                    <div class="text-[14px] md:text-[15px] whitespace-pre-line text-center">LỄ THÀNH HÔN ĐƯỢC CỬ HÀNH <br>TẠI TƯ GIA</div>
+                                    <p class="text-[14px] md:text-[15px] uppercase">VÀO LÚC 10:00</p>
                                     <div class="flex items-center justify-center">
-                                        <span class="text-[18px] md:text-[16px] uppercase text-right">CHỦ NHẬT</span>
-                                        <span class="text-[18px] opacity-50 mx-2 md:mx-3">|</span>
-                                        <span class="text-[36px] md:text-[42px]">12</span>
-                                        <span class="text-[18px] opacity-50 mx-2 md:mx-3">|</span>
-                                        <span class="text-[18px] md:text-[16px] uppercase text-left">THÁNG 04</span>
+                                        <span class="text-[14px] md:text-[15px] uppercase text-right">CHỦ NHẬT</span>
+                                        <span class="text-[14px] opacity-50 mx-2 md:mx-3">|</span>
+                                        <span class="text-[32px] md:text-[38px]">12</span>
+                                        <span class="text-[14px] opacity-50 mx-2 md:mx-3">|</span>
+                                        <span class="text-[14px] md:text-[15px] uppercase text-left">THÁNG 04</span>
                                     </div>
-                                    <div class="text-[20px] md:text-[24px]">2026</div>
-                                    <div class="text-[20px] md:text-[24px] font-normal">(Tức ngày 25/02 Bính Ngọ)</div>
+                                    <div class="text-[20px] md:text-[22px]">2026</div>
+                                    <div class="text-[13px] md:text-[14px] font-normal">(Tức ngày 25/02 Bính Ngọ)</div>
                                 </div>
                             </div>
 
@@ -344,13 +351,13 @@
                                             <img alt="Wedding photo 1" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-1.jpg">
                                         </div>
                                         <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-lg border border-[#00000011] bg-white/50 reveal reveal-up delay-200" onclick="openLightbox(1)">
-                                            <img alt="Wedding photo 2" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-13.jpg">
+                                            <img alt="Wedding photo 2" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-5.jpg">
                                         </div>
                                         <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-lg border border-[#00000011] bg-white/50 reveal reveal-up delay-300" onclick="openLightbox(2)">
-                                            <img alt="Wedding photo 3" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-5.jpg">
+                                            <img alt="Wedding photo 3" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-3.jpg">
                                         </div>
                                         <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-lg border border-[#00000011] bg-white/50 reveal reveal-up delay-400" onclick="openLightbox(3)">
-                                            <img alt="Wedding photo 4" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-3.jpg">
+                                            <img alt="Wedding photo 4" class="gallery-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" style="object-position: center 15%;" src="image-wedding/image-8.jpg">
                                         </div>
                                     </div>
                                 </div>
@@ -358,37 +365,37 @@
 
                             <!-- PARTY RECEPTION -->
                             <div class="flex flex-col items-center gap-4 md:gap-6 text-center reveal reveal-up">
-                                <h3 class="text-[18px] md:text-[22px] uppercase font-cormorant font-bold">Tiệc cưới sẽ diễn ra vào lúc:</h3>
-                                <div class="text-[18px] md:text-[22px] font-cormorant font-bold">17:00</div>
+                                <h3 class="text-[18px] md:text-[20px] uppercase flex flex-col items-center font-cormorant font-bold">Tiệc cưới sẽ diễn ra vào lúc:</h3>
+                                <div class="text-[18px] md:text-[20px] font-semibold">17:00</div>
                                 <div class="flex items-center justify-center font-cormorant font-bold">
-                                    <span class="text-[18px] md:text-[20px] uppercase text-right">Thứ Bảy</span>
-                                    <span class="text-[16px] opacity-50 mx-2 md:mx-3">/</span>
-                                    <span class="text-[30px] md:text-[40px]">11</span>
-                                    <span class="text-[16px] opacity-50 mx-2 md:mx-3">/</span>
-                                    <span class="text-[18px] md:text-[20px] uppercase text-left">THÁNG 04</span>
+                                    <span class="text-[18px] md:text-[20px] font-semibold uppercase">Thứ Bảy</span>
+                                    <span class="text-[14px] opacity-50 mx-2 md:mx-3">/</span>
+                                    <span class="text-[30px] md:text-[36px] font-semibold">11</span>
+                                    <span class="text-[14px] opacity-50 mx-2 md:mx-3">/</span>
+                                    <span class="text-[18px] md:text-[20px] font-semibold uppercase">THÁNG 04</span>
                                 </div>
-                                <div class="text-[20px] md:text-[25px] font-cormorant">(Tức ngày 24/02 Bính Ngọ)</div>
+                                <div class="text-[13px] md:text-[14px] font-cormorant">(Tức ngày 24/02 Bính Ngọ)</div>
                                 
                                 <div class="flex items-center justify-center gap-12 mt-4 font-cormorant">
                                     <div class="flex flex-col items-center">
-                                        <span class="text-[16px] uppercase tracking-wider font-bold">Đón khách</span>
-                                        <span class="text-[20px] font-bold mt-1">15:30</span>
+                                        <span class="text-[11px] uppercase tracking-wider">Đón khách</span>
+                                        <span class="text-[18px] md:text-[20px] font-semibold mt-1">15:30</span>
                                     </div>
                                     <div class="flex flex-col items-center">
-                                        <span class="text-[16px] uppercase tracking-wider font-bold">Khai tiệc</span>
-                                        <span class="text-[20px] font-bold mt-1">17:00</span>
+                                        <span class="text-[11px] uppercase tracking-wider">Khai tiệc</span>
+                                        <span class="text-[18px] md:text-[20px] font-semibold mt-1">17:00</span>
                                     </div>
                                 </div>
 
                                 <!-- Countdown -->
-                                <div class="flex items-center justify-center flex-col mt-6 font-cormorant">
-                                    <h2 class="text-[18px] md:text-[22px] uppercase font-bold">Cùng đếm ngược</h2>
-                                    <div id="countdown-timer" class="text-center mt-2 text-[18px] md:text-[22px] font-bold tracking-wide">
+                                <div class="flex items-center justify-center flex-col font-cormorant">
+                                    <h2 class="text-[18px] md:text-[20px] uppercase flex flex-col items-center">Cùng đếm ngược</h2>
+                                    <div id="countdown-timer" class="text-center mt-2 text-[18px] md:text-[20px] font-semibold">
                                         Đang tính toán...
                                     </div>
                                 </div>
 
-                                <button onclick="window.openModal('rsvp-modal')" class="mt-8 text-sm md:text-base tracking-wider rounded-lg px-8 py-3 font-bold transition-transform hover:scale-105 shadow-md font-cormorant" style="background-color: #710001; color: white;">
+                                <button onclick="window.openModal('rsvp-modal')" class="mt-4 text-[16px] h-12 md:text-base tracking-wider rounded-lg px-8 py-3 transition-transform hover:scale-105 shadow-md font-cormorant font-bold" style="background-color: #710001; color: white;">
                                     XÁC NHẬN THAM DỰ
                                 </button>
                             </div>
@@ -399,7 +406,7 @@
                             <section class="relative flex flex-col gap-6 md:gap-8 px-6 md:px-10 pb-12 md:pb-16 reveal reveal-up">
                                 <div class="relative text-center">
                                     <h3 class="font-bold uppercase text-[20px] md:text-[24px] font-serif tracking-wider mb-4">Tiệc cưới sẽ tổ chức <br/>tại nhà trai</h3>
-                                    <div class="mx-auto max-w-sm md:max-w-[600px] text-center text-sm md:text-base pb-3 border-b border-[#710001]/20 font-cormorant font-bold">
+                                    <div class="mx-auto max-w-sm md:max-w-[600px] text-center text-[16px] md:text-base pb-3 border-b border-[#710001]/20 font-cormorant font-bold">
                                         Thôn Tháp Dương - Xã Trung Kênh - Tỉnh Bắc Ninh
                                     </div>
                                 </div>
@@ -411,12 +418,12 @@
                             <section class="relative flex flex-col gap-6 md:gap-8 px-6 md:px-10 pb-12 md:pb-16 reveal reveal-up">
                                 <div class="relative text-center">
                                     <h3 class="font-bold uppercase text-[20px] md:text-[24px] font-serif tracking-wider mb-4">Tiệc cưới sẽ tổ chức <br/>tại nhà gái</h3>
-                                    <div class="mx-auto max-w-sm md:max-w-[600px] text-center text-sm md:text-base pb-3 border-b border-[#710001]/20 font-cormorant font-bold">
+                                    <div class="mx-auto max-w-sm md:max-w-[600px] text-center text-[16px] md:text-base pb-3 border-b border-[#710001]/20 font-cormorant font-bold">
                                         Thôn Hương Chi - Xã Lương Tài - Tỉnh Bắc Ninh
                                     </div>
                                 </div>
                                 <div class="relative flex flex-col items-center w-full">
-                                    <iframe class="h-[260px] md:h-[360px] w-full max-w-[375px] md:max-w-[600px] rounded-2xl overflow-hidden shadow-lg border border-[#710001]/20" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1861.8908261812026!2d106.24502958639833!3d21.041420901267728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31359e0cb58ca503%3A0xd63df6c497207f9!2zSMawxqFuZyBDaGksIEzGsMahbmcgVMOgaSwgQuG6r2MgTmluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1774963133045!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    <iframe class="h-[260px] md:h-[360px] w-full max-w-[375px] md:max-w-[600px] rounded-2xl overflow-hidden shadow-lg border border-[#710001]/20" src="https://maps.google.com/maps?q=21.039197,106.245751&hl=vi&z=18&output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </section>
                         </div>
@@ -455,7 +462,7 @@
                         <section class="relative px-4 md:px-8 pb-12 md:pb-16 z-10 flex flex-col items-center reveal reveal-up">
                             <div class="text-center mb-6">
                                 <h2 class="text-[32px] md:text-[40px] custom-name-font">Sổ lưu bút</h2>
-                                <p class="text-[14px] md:text-sm font-cormorant mt-2 font-bold">Gửi lời chúc tốt đẹp nhất đến cô dâu chú rể</p>
+                                <p class="text-[16px] md:text-sm font-cormorant mt-2 font-bold">Gửi lời chúc tốt đẹp nhất đến cô dâu chú rể</p>
                             </div>
                             
                             <div class="w-full max-w-[600px] bg-white p-6 rounded-xl border border-[#710001]/20 shadow-sm">
@@ -465,8 +472,8 @@
                                     <textarea id="wish-result" placeholder="Nhập lời chúc của bạn*" class="w-full rounded-md border border-[#710001] px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#710001] bg-white text-[#710001] resize-none" rows="4" required></textarea>
                                     
                                     <div class="mt-2 flex items-center justify-end">
-                                        <button id="submit-wish-btn" onclick="window.handleWishSubmit()" class="rounded-full px-6 py-2 text-xs font-bold transition-transform hover:scale-105" style="background-color: #710001; color: white;">
-                                            GỬI LỜI CHÚC
+                                        <button id="submit-wish-btn" onclick="window.handleWishSubmit()" class="h-10 flex items-center rounded-full px-6 py-2 text-xs font-bold transition-transform hover:scale-105" style="background-color: #710001; color: white;">
+                                            Gửi lời chúc
                                         </button>
                                     </div>
                                 </div>
@@ -484,27 +491,27 @@
                             <div class="flex flex-row gap-6 sm:gap-12 items-start justify-center w-full max-w-[600px]">
                                 <!-- Bride QR -->
                                 <div class="flex flex-col items-center flex-1">
-                                    <h3 class="mb-3 text-sm md:text-base font-bold text-center h-10 flex items-center">Cô Dâu - Ngọc Bích</h3>
+                                    <h3 class="mb-3 text-sm md:text-base font-bold text-center flex items-center custom-montserrat">Cô Dâu - Ngọc Bích</h3>
                                     <div class="w-32 h-32 md:w-44 md:h-44 bg-white rounded-xl p-2 shadow-lg flex items-center justify-center border-2 border-[#710001]/20">
                                         <img alt="QR Code Ngọc Bích" class="w-full h-full object-contain" src="/qr/qrNB.jpg">
                                     </div>
                                     <div class="mt-4 text-center">
-                                        <p class="text-xs font-bold">BIDV</p>
-                                        <p class="text-xs font-mono my-1">25610001202557</p>
-                                        <p class="text-xs font-bold uppercase">Nguyễn Thị Ngọc Bích</p>
+                                        <p class="text-xs font-bold custom-montserrat">BIDV</p>
+                                        <p class="text-xs font-mono my-1 custom-montserrat">25610001202557</p>
+                                        <p class="text-xs font-bold uppercase custom-montserrat">Nguyễn Thị Ngọc Bích</p>
                                     </div>
                                 </div>
                                 
                                 <!-- Groom QR -->
                                 <div class="flex flex-col items-center flex-1">
-                                    <h3 class="mb-3 text-sm md:text-base font-bold text-center h-10 flex items-center">Chú Rể - Văn Thuân</h3>
+                                    <h3 class="mb-3 text-sm md:text-base font-bold text-center flex items-center custom-montserrat">Chú Rể - Văn Thuân</h3>
                                     <div class="w-32 h-32 md:w-44 md:h-44 bg-white rounded-xl p-2 shadow-lg flex items-center justify-center border-2 border-[#710001]/20">
                                         <img alt="QR Code Thế Bảo" class="w-full h-full object-contain" src="/qr/qrVT.jpg">
                                     </div>
                                     <div class="mt-4 text-center">
-                                        <p class="text-xs font-bold">VIB</p>
-                                        <p class="text-xs font-mono my-1">966090928</p>
-                                        <p class="text-xs font-bold uppercase">Trần Văn Thuân</p>
+                                        <p class="text-xs font-bold custom-montserrat">VIB</p>
+                                        <p class="text-xs font-mono my-1 custom-montserrat">966090928</p>
+                                        <p class="text-xs font-bold uppercase custom-montserrat">Trần Văn Thuân</p>
                                     </div>
                                 </div>
                             </div>
@@ -512,7 +519,7 @@
 
                         <!-- FOOTER -->
                         <footer class="relative w-full flex flex-col items-center justify-center px-4 py-8 text-center z-10 bg-wedding-red text-wedding-bg reveal reveal-up">
-                            <span class="font-cormorant text-[16px] md:text-[20px] font-bold">
+                            <span class="text-[15px] md:text-[20px] font-bold custom-lora">
                                 Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!
                             </span>
                         </footer>
@@ -596,7 +603,7 @@
             </div>
 
             <div class="mt-8 flex justify-end">
-                <button onclick="window.handleRsvpSubmit()" id="btn-submit-rsvp" class="w-full py-3 bg-[#710001] text-white font-bold rounded shadow-lg hover:bg-red-900 transition flex justify-center items-center gap-2">
+                <button onclick="window.handleRsvpSubmit()" id="btn-submit-rsvp" class="w-full py-3 bg-[#710001] text-white rounded shadow-lg hover:bg-red-900 transition flex justify-center items-center gap-2">
                     Gửi Xác Nhận
                 </button>
             </div>
@@ -716,10 +723,10 @@
             listEl.innerHTML = wishes.map(w => `
                 <div class="rounded-lg border border-[#710001]/20 p-4 text-sm bg-white shadow-sm">
                     <div class="flex items-start justify-between font-bold text-[#710001]">
-                        <span class="text-base">${escapeHtml(w.name)}</span>
-                        <span class="text-[10px] opacity-60 font-normal uppercase tracking-wider">${new Date(w.timestamp).toLocaleString('vi-VN')}</span>
+                        <span class="text-[16px]">${escapeHtml(w.name)}</span>
+                        <span class="text-[12px] opacity-60 font-normal uppercase tracking-wider">${new Date(w.timestamp).toLocaleString('vi-VN')}</span>
                     </div>
-                    <p class="mt-2 leading-relaxed font-cormorant text-xs font-bold text-gray-800">${escapeHtml(w.text)}</p>
+                    <p class="mt-2 leading-relaxed font-cormorant text-[14px] font-bold text-gray-800">${escapeHtml(w.text)}</p>
                 </div>
             `).join('');
         }
